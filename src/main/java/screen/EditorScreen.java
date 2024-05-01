@@ -170,7 +170,7 @@ public class EditorScreen extends Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj.x == x - (x % 64) && obj.y == y - (y % 64) && !(obj instanceof Grid)) {
+            if (obj != null && obj.x == x - (x % 64) && obj.y == y - (y % 64) && !(obj instanceof Grid)) {
                 Screen.remove(obj);
 
                 if (obj instanceof Platform)

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
-import main.java.object.block.Platform;
 import main.java.object.entity.Particle;
 import main.java.object.entity.Player;
 
@@ -135,7 +134,7 @@ public abstract class Screen {
     public static void remove(GameObject obj) {
         objects.remove(obj);
 
-        if (obj instanceof Platform)
+        if (obj instanceof Collidable)
             Collidable.collidables.remove(obj);
 
         else if (obj instanceof Player)
