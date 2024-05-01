@@ -131,6 +131,7 @@ public class Player extends GameObject {
 
             case 38: // UP
                 controls[1] = false;
+                jumping = false;
                 break;
 
             case 39: // RIGHT

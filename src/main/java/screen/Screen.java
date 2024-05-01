@@ -9,6 +9,7 @@ import main.java.object.GameObject;
 import main.java.object.block.Collidable;
 import main.java.object.block.Platform;
 import main.java.object.entity.Particle;
+import main.java.object.entity.Player;
 
 public abstract class Screen {
     protected static ArrayList<GameObject> objects;
@@ -16,6 +17,8 @@ public abstract class Screen {
 
     public Screen() {
         objects = new ArrayList<>();
+        Collidable.collidables.clear();
+        RoomScreen.resetPoints();
     }
 
     public void draw(Graphics pen) {
@@ -134,6 +137,10 @@ public abstract class Screen {
 
         if (obj instanceof Platform)
             Collidable.collidables.remove(obj);
+
+        else if (obj instanceof Player)
+            if (obj.equals(Player.main))
+                Player.main = null;
     }
 
     public static void add(GameObject obj) {

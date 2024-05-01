@@ -11,6 +11,7 @@ import main.java.object.block.BlockType;
 import main.java.object.block.Collidable;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
+import main.java.object.entity.Player;
 import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
 import main.java.screen.gui.Button;
@@ -26,7 +27,7 @@ public class EditorScreen extends Screen {
     private String object;
     private ArrayList<String> level;
     private int x, y;
-    private StartTile start;
+    public static StartTile start;
     private EndTile end;
 
     public EditorScreen() {
@@ -45,12 +46,15 @@ public class EditorScreen extends Screen {
 
         objects.add(new Button(330, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Reset Level", new ResetEditor()));
 
-        objects.add(new Button(490, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", new SwapObject("Block")));
+        objects.add(new Button(490, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Test Level", new Test()));
 
-        objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
-        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", new SwapObject("End")));
+        objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", new SwapObject("Block")));
 
-        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike", new SwapObject("Spike")));
+        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
+        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", new SwapObject("End")));
+
+        objects.add(
+                new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike", new SwapObject("Spike")));
 
         genBaseMap();
     }
@@ -120,7 +124,7 @@ public class EditorScreen extends Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj.x == x - (x % 64) && obj.y == y - (y % 64) && !(obj instanceof Grid)) {
+            if (obj != null && obj.x == x - (x % 64) && obj.y == y - (y % 64) && !(obj instanceof Grid)) {
                 add = false;
             }
         }
@@ -209,6 +213,23 @@ public class EditorScreen extends Screen {
 
         public void action() {
             swap(this.object);
+        }
+    }
+
+    private class Test implements ButtonAction {
+        public void action() {
+            int x = 0;
+            int y = 0;
+
+            if (start != null) {
+                x = start.x;
+                y = start.y;
+            }
+
+            if (Player.main == null)
+                objects.add(new Player(x, y, 50, 50, Color.CYAN));
+            else
+                remove(Player.main);
         }
     }
 }

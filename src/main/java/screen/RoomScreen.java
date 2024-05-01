@@ -18,7 +18,7 @@ import main.java.object.meta.StartTile;
 public class RoomScreen extends GameScreen {
     private String roomName;
     private static StartTile start;
-    private EndTile end;
+    private static EndTile end;
     private int level;
 
     public RoomScreen(int level) {
@@ -31,6 +31,7 @@ public class RoomScreen extends GameScreen {
         }
     }
 
+    @SuppressWarnings("static-access")
     public void update() {
         super.update();
 
@@ -92,10 +93,25 @@ public class RoomScreen extends GameScreen {
     }
 
     public static void resetPlayer() {
+        if (MyGame.screen instanceof EditorScreen) {
+            Player.main.x = 0;
+            Player.main.y = 0;
+
+            if (EditorScreen.start != null) {
+                Player.main.x = EditorScreen.start.x;
+                Player.main.y = EditorScreen.start.y;
+            }
+        }
+
         if (start == null)
             return;
 
         Player.main.x = start.x;
         Player.main.y = start.y;
+    }
+
+    public static void resetPoints() {
+        start = null;
+        end = null;
     }
 }
