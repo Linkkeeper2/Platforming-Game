@@ -6,9 +6,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import main.java.object.GameObject;
+import main.java.object.block.Collidable;
+import main.java.object.block.Platform;
 
 public abstract class Screen {
-    protected ArrayList<GameObject> objects;
+    protected static ArrayList<GameObject> objects;
 
     public Screen() {
         objects = new ArrayList<>();
@@ -120,5 +122,12 @@ public abstract class Screen {
             if (obj != null)
                 obj.mouseMoved(me);
         }
+    }
+
+    public static void remove(GameObject obj) {
+        objects.remove(obj);
+
+        if (obj instanceof Platform)
+            Collidable.collidables.remove(obj);
     }
 }

@@ -2,19 +2,16 @@ package main.java.object.block;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import main.java.object.GameObject;
 
-public class Platform extends GameObject {
-    public static ArrayList<Platform> platforms = new ArrayList<>();
+public class Platform extends Collidable {
     private BlockType type;
 
     public Platform(int x, int y, int width, int height, Color color, BlockType type) {
         super(x, y, width, height, color);
 
         this.type = type;
-        platforms.add(this);
     }
 
     public void draw(Graphics pen) {

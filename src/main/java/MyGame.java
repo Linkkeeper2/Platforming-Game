@@ -7,6 +7,7 @@ import java.util.Timer;
 
 import main.java.screen.Screen;
 import main.java.screen.StartScreen;
+import main.java.server.Database;
 
 public class MyGame extends Game {
     public static final String TITLE = "Platforming Game";
@@ -15,9 +16,11 @@ public class MyGame extends Game {
 
     public static Timer timer = new Timer();
     public static Screen screen;
+    public static Database database;
 
     public MyGame() {
         screen = new StartScreen();
+        database = new Database();
     }
 
     public void update() {

@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 import main.java.object.GameObject;
+import main.java.screen.gui.button.ButtonAction;
 
 public class Button extends GameObject {
     private ButtonAction action;

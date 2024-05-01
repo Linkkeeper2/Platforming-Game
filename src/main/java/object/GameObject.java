@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public abstract class GameObject {
     public int x, y;
@@ -12,6 +17,7 @@ public abstract class GameObject {
     protected Color color;
     protected Color normalColor;
     protected byte direction;
+    protected BufferedImage sprite;
 
     public GameObject(int x, int y, int width, int height, Color color) {
         this.x = x;
@@ -23,7 +29,11 @@ public abstract class GameObject {
     }
 
     public void draw(Graphics pen) {
-        if (this.color != null) {
+        if (this.sprite != null) {
+            pen.drawImage(sprite, x, y, null);
+        }
+
+        else if (this.color != null) {
             pen.setColor(this.color);
             pen.fillRect(x, y, width, height);
         }
@@ -123,6 +133,17 @@ public abstract class GameObject {
 
     public Rectangle getBottom(int height) {
         return new Rectangle(x + 1, y + this.height - height, width - 1, height);
+    }
+
+    protected void setSprite(String path) {
+        try {
+            if (!path.equals("")) {
+                sprite = ImageIO.read(new File(path));
+            } else {
+                sprite = null;
+            }
+        } catch (IOException e) {
+        }
     }
 
     public void keyTyped(KeyEvent ke) {
