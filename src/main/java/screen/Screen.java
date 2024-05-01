@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
 import main.java.object.block.Platform;
+import main.java.object.entity.Particle;
 
 public abstract class Screen {
     protected static ArrayList<GameObject> objects;
+    public static boolean debugMode;
 
     public Screen() {
         objects = new ArrayList<>();
@@ -29,7 +31,7 @@ public abstract class Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj != null)
+            if (obj != null && !(obj instanceof Particle))
                 obj.update();
         }
     }
@@ -50,6 +52,9 @@ public abstract class Screen {
             if (obj != null)
                 obj.keyPressed(ke);
         }
+
+        if (ke.getKeyCode() == 192)
+            debugMode = !debugMode;
     }
 
     public void keyReleased(KeyEvent ke) {
@@ -129,5 +134,9 @@ public abstract class Screen {
 
         if (obj instanceof Platform)
             Collidable.collidables.remove(obj);
+    }
+
+    public static void add(GameObject obj) {
+        objects.add(obj);
     }
 }

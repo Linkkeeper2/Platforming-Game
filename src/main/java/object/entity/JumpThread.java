@@ -8,7 +8,7 @@ public class JumpThread extends Thread {
     }
 
     public void run() {
-        double jumpheight = 12;
+        double jumpheight = 20;
 
         while (jumpheight > 0 && player.jumping) {
             try {
@@ -17,7 +17,7 @@ public class JumpThread extends Thread {
             }
 
             player.y -= (int) jumpheight;
-            jumpheight -= 0.2;
+            jumpheight -= 0.5;
         }
 
         player.jumping = false;

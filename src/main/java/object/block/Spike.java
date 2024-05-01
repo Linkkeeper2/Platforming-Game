@@ -10,14 +10,11 @@ public class Spike extends Collidable {
         super(x, y, 64, 64, null);
 
         setSprite("./gfx/Objects/Spike.png");
+        this.hitbox = new Rectangle(x + 16, y + 12, width - 32, height - 12);
     }
 
     public void collideAction(GameObject g) {
-        if (getRect().intersects(g.getRect()))
+        if (getHitbox().intersects(g.getRect()))
             Player.main.kill();
-    }
-
-    public Rectangle getRect() {
-        return new Rectangle(x + 16, y + 12, width - 32, height - 12);
     }
 }

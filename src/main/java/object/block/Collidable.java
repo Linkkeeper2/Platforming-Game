@@ -1,17 +1,31 @@
 package main.java.object.block;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import main.java.object.GameObject;
+import main.java.screen.Screen;
 
 public abstract class Collidable extends GameObject {
     public static ArrayList<Collidable> collidables = new ArrayList<>();
+    protected Rectangle hitbox;
 
     public Collidable(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
 
         collidables.add(this);
+        hitbox = new Rectangle(x, y, width, height);
+    }
+
+    public void draw(Graphics pen) {
+        super.draw(pen);
+
+        if (Screen.debugMode) {
+            pen.setColor(Color.RED);
+            pen.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        }
     }
 
     public boolean[] getCollisions(GameObject g) {
@@ -21,5 +35,9 @@ public abstract class Collidable extends GameObject {
     }
 
     public void collideAction(GameObject g) {
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 }

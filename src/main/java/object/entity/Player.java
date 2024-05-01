@@ -8,6 +8,7 @@ import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
 import main.java.screen.RoomScreen;
+import main.java.screen.Screen;
 
 public class Player extends GameObject {
     private boolean[] controls;
@@ -20,7 +21,7 @@ public class Player extends GameObject {
         super(x, y, width, height, color);
         controls = new boolean[3];
         xVel = 10;
-        yVel = 5;
+        yVel = 10;
         main = this;
         alive = true;
     }
@@ -92,8 +93,12 @@ public class Player extends GameObject {
 
     public void kill() {
         alive = false;
+
+        for (int i = 0; i < 10; i++)
+            Screen.add(new Particle(x + width / 2, y + height / 2, color, (byte) (i % 2)));
+
         xVel = 10;
-        yVel = 5;
+        yVel = 10;
         RoomScreen.resetPlayer();
         jumping = false;
         canJump = false;

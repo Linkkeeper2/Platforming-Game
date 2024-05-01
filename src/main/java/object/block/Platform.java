@@ -30,7 +30,7 @@ public class Platform extends Collidable {
         boolean[] collisions = new boolean[4];
 
         collisions[0] = getLeft(4).intersects(g.getRight(10));
-        collisions[1] = getTop(4).intersects(g.getBottom(6));
+        collisions[1] = getTop(4).intersects(g.getBottom(10));
         collisions[2] = getRight(4).intersects(g.getLeft(10));
         collisions[3] = getBottom(4).intersects(g.getTop(6));
 
