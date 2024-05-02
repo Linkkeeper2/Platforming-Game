@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import main.java.object.GameObject;
+import main.java.object.meta.Hitbox;
 import main.java.screen.Screen;
 
 public abstract class Collidable extends GameObject {

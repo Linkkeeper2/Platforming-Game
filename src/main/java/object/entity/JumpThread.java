@@ -1,25 +1,25 @@
 package main.java.object.entity;
 
 public class JumpThread extends Thread {
-    private Player player;
+    private EntityBody entity;
 
-    public JumpThread(Player p) {
-        this.player = p;
+    public JumpThread(EntityBody p) {
+        this.entity = p;
     }
 
     public void run() {
         double jumpheight = 20;
 
-        while (jumpheight > 0 && player.jumping) {
+        while (jumpheight > 0 && entity.jumping) {
             try {
                 sleep(10);
             } catch (InterruptedException e) {
             }
 
-            player.y -= (int) jumpheight;
+            entity.y -= (int) jumpheight;
             jumpheight -= 0.5;
         }
 
-        player.jumping = false;
+        entity.jumping = false;
     }
 }

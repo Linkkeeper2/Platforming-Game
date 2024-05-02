@@ -1,11 +1,13 @@
 package main.java.object.entity;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
+import main.java.object.meta.Hitbox;
 import main.java.screen.Screen;
 
 public abstract class EntityBody extends GameObject {
@@ -13,6 +15,7 @@ public abstract class EntityBody extends GameObject {
     protected boolean alive;
     protected short xVel, yVel;
     protected short baseXVel, baseYVel;
+    protected Hitbox hitbox;
 
     public EntityBody(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -20,9 +23,20 @@ public abstract class EntityBody extends GameObject {
         yVel = 10;
         baseXVel = xVel;
         baseYVel = yVel;
+        hitbox = new Hitbox(x, y, width, height, Color.GREEN);
+    }
+
+    public void draw(Graphics pen) {
+        super.draw(pen);
+        hitbox.draw(pen);
     }
 
     public void update() {
+        if (!canJump)
+            hitbox.updateRect(x, y, width, height);
+        else
+            hitbox.updateRect(x, y - yVel, width, height);
+
         if (y >= MyGame.SCREEN_HEIGHT)
             kill();
 
@@ -61,6 +75,8 @@ public abstract class EntityBody extends GameObject {
                 jumping = false;
                 side = false;
             }
+
+            hitbox.updateRect(x, y, width, height);
         }
 
         if (unflag)

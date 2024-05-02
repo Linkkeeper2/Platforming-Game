@@ -24,8 +24,10 @@ public class Player extends EntityBody {
     }
 
     private void controls() {
-        if (controls[0] || controls[2])
+        if (controls[0] || controls[2]) {
             x += xVel * direction;
+            hitbox.updateRect(x, y, width, height);
+        }
 
         if (controls[1] && !jumping && canJump) {
             jumping = true;

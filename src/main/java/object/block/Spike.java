@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import main.java.object.GameObject;
 import main.java.object.entity.Player;
+import main.java.object.meta.Hitbox;
 
 public class Spike extends Collidable {
     public Spike(int x, int y) {

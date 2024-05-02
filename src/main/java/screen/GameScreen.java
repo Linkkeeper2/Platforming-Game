@@ -8,7 +8,7 @@ import main.java.object.entity.Player;
 
 public abstract class GameScreen extends Screen {
     public GameScreen() {
-        objects.add(new Player(0, 0, 50, 50, Color.CYAN));
+        objects.add(new Player(0, 0, 50, 50, new Color(0, 150, 255)));
     }
 
     public void keyPressed(KeyEvent ke) {
