@@ -2,7 +2,11 @@ package main.java.object.entity;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import linkk.manager.SoundManager;
 import main.java.screen.RoomScreen;
 import main.java.screen.Screen;
 
@@ -54,6 +58,10 @@ public class Player extends EntityBody {
     public void kill() {
         super.kill();
         RoomScreen.resetPlayer();
+        try {
+            SoundManager.playSound("./sfx/Player/Death.wav", 0);
+        } catch (NullPointerException | UnsupportedAudioFileException | IOException e) {
+        }
     }
 
     public void keyPressed(KeyEvent ke) {

@@ -295,6 +295,10 @@ public class EditorScreen extends Screen {
         selectedObject.y = y - (y % 64);
     }
 
+    public void setLevel(ArrayList<String> level) {
+        this.level = level;
+    }
+
     private class SaveMap implements ButtonAction {
         public void action() {
             TextBox box = new TextBox(8, MyGame.SCREEN_HEIGHT - 160, 250, "Level Name:");
