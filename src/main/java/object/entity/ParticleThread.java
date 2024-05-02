@@ -11,7 +11,7 @@ public class ParticleThread extends Thread {
     }
 
     public void run() {
-        while (particle.y < MyGame.SCREEN_HEIGHT) {
+        while (particle.y < MyGame.SCREEN_HEIGHT + 128) {
             if (!Screen.subOn())
                 particle.update();
             try {

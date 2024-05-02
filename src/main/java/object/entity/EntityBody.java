@@ -75,16 +75,19 @@ public abstract class EntityBody extends GameObject {
                 side = false;
             }
 
-            if (intersections[0] && side)
+            if (intersections[0] && side) {
                 this.x = platform.x - this.width;
+                canJump = false;
+            }
 
-            if (intersections[2] && side)
+            if (intersections[2] && side) {
                 this.x = platform.x + platform.width;
+                canJump = false;
+            }
 
-            if (intersections[3]) {
+            if (intersections[3] && !side) {
                 this.y = platform.y + platform.height;
                 jumping = false;
-                side = false;
             }
 
             hitbox.updateRect(x, y, width, height);

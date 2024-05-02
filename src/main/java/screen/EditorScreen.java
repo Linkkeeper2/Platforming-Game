@@ -34,6 +34,7 @@ public class EditorScreen extends Screen {
     private EndTile end;
     private int rotation;
     private GhostObject selectedObject;
+    private ArrayList<String> rotatables;
 
     public EditorScreen() {
         object = "Block";
@@ -67,6 +68,11 @@ public class EditorScreen extends Screen {
                         "./gfx/Editor/Death/Spike.png", new SwapObject("Spike")));
 
         selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
+
+        rotatables = new ArrayList<>();
+
+        rotatables.add("Spike");
+
         genBaseMap();
     }
 
@@ -86,12 +92,14 @@ public class EditorScreen extends Screen {
                 break;
 
             case 82: // R
-                rotation += 90;
+                if (rotatables.contains(object)) {
+                    rotation += 90;
 
-                if (rotation == 360)
-                    rotation = 0;
+                    if (rotation == 360)
+                        rotation = 0;
 
-                setGhost();
+                    setGhost();
+                }
                 break;
         }
     }
@@ -127,6 +135,7 @@ public class EditorScreen extends Screen {
 
     public void swap(String obj) {
         object = obj;
+        rotation = 0;
 
         switch (object) {
             case "Start":
@@ -166,7 +175,7 @@ public class EditorScreen extends Screen {
 
         String path = "./gfx/Objects/" + object;
 
-        if (rotation != 0 && object.equals("Spike"))
+        if (rotation != 0 && rotatables.contains(object))
             path += rotation + "";
 
         selectedObject = new GhostObject(x - (x % 64), y - (y % 64), path + ".png");
