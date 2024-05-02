@@ -9,6 +9,8 @@ import main.java.screen.Screen;
 import main.java.screen.StartScreen;
 import main.java.server.Database;
 
+// NOTE TO SELF: FIX LOADING LEVELS IN EDITOR NOT UPDATING DATA ARRAY
+
 public class MyGame extends Game {
     public static final String TITLE = "Platforming Game";
     public static final int SCREEN_WIDTH = 1728;
