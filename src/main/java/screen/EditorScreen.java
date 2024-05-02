@@ -71,12 +71,21 @@ public class EditorScreen extends Screen {
 
         updateMouse(me);
 
-        if (me.getButton() == 1) {
-            placeObject(x, y);
-        }
+        switch (me.getButton()) {
+            case 1:
+                placeObject(x, y);
+                break;
 
-        else if (me.getButton() == 3) {
-            removeObject(x, y);
+            case 2:
+                if (Player.main != null) {
+                    Player.main.x = x;
+                    Player.main.y = y;
+                }
+                break;
+
+            case 3:
+                removeObject(x, y);
+                break;
         }
     }
 
@@ -227,7 +236,7 @@ public class EditorScreen extends Screen {
             }
 
             if (Player.main == null)
-                objects.add(new Player(x, y, 50, 50, Color.CYAN));
+                objects.add(new Player(x, y, 50, 50, new Color(0, 150, 255)));
             else
                 remove(Player.main);
         }

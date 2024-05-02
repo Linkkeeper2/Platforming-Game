@@ -32,6 +32,8 @@ public abstract class EntityBody extends GameObject {
     }
 
     public void update() {
+        border();
+
         if (!canJump)
             hitbox.updateRect(x, y, width, height);
         else
@@ -41,6 +43,14 @@ public abstract class EntityBody extends GameObject {
             kill();
 
         collisions();
+    }
+
+    private void border() {
+        if (x < 0)
+            x = 0;
+
+        else if (x > MyGame.SCREEN_WIDTH - width - 16)
+            x = MyGame.SCREEN_WIDTH - width - 16;
     }
 
     private void collisions() {
