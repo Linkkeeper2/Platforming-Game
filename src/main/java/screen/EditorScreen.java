@@ -29,6 +29,7 @@ public class EditorScreen extends Screen {
     private int x, y;
     public static StartTile start;
     private EndTile end;
+    private int rotation;
 
     public EditorScreen() {
         object = "Block";
@@ -51,10 +52,12 @@ public class EditorScreen extends Screen {
         objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", new SwapObject("Block")));
 
         objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
-        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", new SwapObject("End")));
+        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", "./gfx/Editor/Flag.png",
+                new SwapObject("End")));
 
         objects.add(
-                new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike", new SwapObject("Spike")));
+                new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike",
+                        "./gfx/Editor/Death/Spike.png", new SwapObject("Spike")));
 
         genBaseMap();
     }
@@ -62,8 +65,18 @@ public class EditorScreen extends Screen {
     public void keyPressed(KeyEvent ke) {
         super.keyPressed(ke);
 
-        if (ke.getKeyCode() == 27)
-            MyGame.screen = new StartScreen();
+        switch (ke.getKeyCode()) {
+            case 27: // ESCAPE
+                MyGame.screen = new StartScreen();
+                break;
+
+            case 82: // R
+                rotation += 90;
+
+                if (rotation == 360)
+                    rotation = 0;
+                break;
+        }
     }
 
     public void mouseClicked(MouseEvent me) {
@@ -165,8 +178,8 @@ public class EditorScreen extends Screen {
                     break;
 
                 case "Spike":
-                    objects.add(new Spike(x - (x % 64), y - (y % 64)));
-                    setTile(row, col, 4);
+                    objects.add(new Spike(x - (x % 64), y - (y % 64), rotation));
+                    setTile(row, col, 4 + rotation / 90);
                     break;
             }
         }

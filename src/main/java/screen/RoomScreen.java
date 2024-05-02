@@ -67,7 +67,9 @@ public class RoomScreen extends GameScreen {
             String row = data.get(i);
 
             for (int k = 0; k < row.length(); k++) {
-                switch (row.substring(k, k + 1)) {
+                String tile = row.substring(k, k + 1);
+
+                switch (tile) {
                     case "1":
                         objects.add(new Platform(k * 64, i * 64, 64, 64, Color.GRAY, BlockType.SOLID));
                         break;
@@ -82,11 +84,10 @@ public class RoomScreen extends GameScreen {
                         end = new EndTile(k * 64, i * 64);
                         objects.add(end);
                         break;
-
-                    case "4":
-                        objects.add(new Spike(k * 64, i * 64));
-                        break;
                 }
+
+                if (Integer.parseInt(tile) >= 4 && Integer.parseInt(tile) <= 7)
+                    objects.add(new Spike(k * 64, i * 64, (Integer.parseInt(tile) - 4) * 90));
             }
         }
 

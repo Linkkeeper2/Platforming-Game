@@ -22,8 +22,17 @@ public class Button extends GameObject {
         this.content = content;
     }
 
+    public Button(int x, int y, int width, int height, Color color, String content, String spritePath,
+            ButtonAction action) {
+        super(x, y, width, height, color);
+        this.action = action;
+        this.content = content;
+        setSprite(spritePath);
+    }
+
     public void draw(Graphics pen) {
-        super.draw(pen);
+        pen.setColor(this.color);
+        pen.fillRect(x, y, width, height);
 
         pen.setColor(Color.WHITE);
         pen.setFont(new Font("gfx/Font/peepo.ttf", 0, 20));
@@ -35,7 +44,11 @@ public class Button extends GameObject {
                 - StringUtil.getWidth(pen, content) / 2;
         int y = getRect().y + ((int) getRect().getHeight() - (int) getRect().getHeight() / 2) + fm.getAscent() / 2 - 4;
 
-        g2d.drawString(content, x, y);
+        if (this.sprite == null)
+            g2d.drawString(content, x, y);
+        else
+            pen.drawImage(sprite, this.x + width / 2 - sprite.getWidth() / 2,
+                    this.y + height / 2 - sprite.getHeight() / 2, null);
     }
 
     public void mousePressed(MouseEvent me) {
