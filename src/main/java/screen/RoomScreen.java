@@ -46,6 +46,8 @@ public class RoomScreen extends GameScreen {
         pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 48));
         pen.setColor(Color.BLACK);
         pen.drawString(roomName, MyGame.SCREEN_WIDTH / 2 - StringUtil.getWidth(pen, roomName) / 2, 62);
+        pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 24));
+        pen.drawString(level + 1 + "", 8, 32);
     }
 
     public static void loadRoom(int level) {

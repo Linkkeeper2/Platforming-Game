@@ -75,17 +75,21 @@ public abstract class EntityBody extends GameObject {
                 side = false;
             }
 
+            boolean bottom = true;
+
             if (intersections[0] && side) {
                 this.x = platform.x - this.width;
                 canJump = false;
+                bottom = false;
             }
 
             if (intersections[2] && side) {
                 this.x = platform.x + platform.width;
                 canJump = false;
+                bottom = false;
             }
 
-            if (intersections[3] && !side) {
+            if (intersections[3] && bottom) {
                 this.y = platform.y + platform.height;
                 jumping = false;
             }
