@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.bson.Document;
 
+import linkk.util.StringUtil;
 import main.java.MyGame;
 import main.java.object.block.BlockType;
 import main.java.object.block.Platform;
@@ -46,9 +47,9 @@ public class RoomScreen extends GameScreen {
     public void draw(Graphics pen) {
         super.draw(pen);
 
-        pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 20));
+        pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 48));
         pen.setColor(Color.BLACK);
-        pen.drawString(roomName, 8, 32);
+        pen.drawString(roomName, MyGame.SCREEN_WIDTH / 2 - StringUtil.getWidth(pen, roomName) / 2, 62);
     }
 
     private boolean renderLevel(int level) {

@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
+import linkk.util.StringUtil;
 import main.java.object.GameObject;
 import main.java.screen.gui.button.ButtonAction;
 
@@ -30,12 +31,8 @@ public class Button extends GameObject {
         Graphics2D g2d = (Graphics2D) pen;
         FontMetrics fm = g2d.getFontMetrics();
 
-        int sum = 0;
-
-        for (int i = 0; i < content.length(); i++)
-            sum += fm.charWidth(content.charAt(i));
-
-        int x = getRect().x + ((int) getRect().getWidth() - (int) getRect().getWidth() / 2) - sum / 2;
+        int x = getRect().x + ((int) getRect().getWidth() - (int) getRect().getWidth() / 2)
+                - StringUtil.getWidth(pen, content) / 2;
         int y = getRect().y + ((int) getRect().getHeight() - (int) getRect().getHeight() / 2) + fm.getAscent() / 2 - 4;
 
         g2d.drawString(content, x, y);

@@ -9,15 +9,22 @@ import main.java.object.GameObject;
 import main.java.object.block.Collidable;
 import main.java.object.entity.Particle;
 import main.java.object.entity.Player;
+import main.java.screen.sub.SubScreen;
 
 public abstract class Screen {
     protected static ArrayList<GameObject> objects;
+    public static SubScreen subscreen;
     public static boolean debugMode;
+    public static boolean[] globalControls = new boolean[2];
 
     public Screen() {
         objects = new ArrayList<>();
         Collidable.collidables.clear();
         RoomScreen.resetPoints();
+    }
+
+    public static boolean subOn() {
+        return subscreen != null;
     }
 
     public void draw(Graphics pen) {
@@ -27,107 +34,165 @@ public abstract class Screen {
             if (obj != null)
                 obj.draw(pen);
         }
+
+        if (subscreen != null)
+            subscreen.draw(pen);
     }
 
     public void update() {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.update();
 
-            if (obj != null && !(obj instanceof Particle))
-                obj.update();
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null && !(obj instanceof Particle))
+                    obj.update();
+            }
         }
     }
 
     public void keyTyped(KeyEvent ke) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.keyTyped(ke);
 
-            if (obj != null)
-                obj.keyTyped(ke);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.keyTyped(ke);
+            }
         }
     }
 
     public void keyPressed(KeyEvent ke) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.keyPressed(ke);
 
-            if (obj != null)
-                obj.keyPressed(ke);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.keyPressed(ke);
+            }
+
+            if (ke.getKeyCode() == 192)
+                debugMode = !debugMode;
         }
-
-        if (ke.getKeyCode() == 192)
-            debugMode = !debugMode;
     }
 
     public void keyReleased(KeyEvent ke) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.keyReleased(ke);
 
-            if (obj != null)
-                obj.keyReleased(ke);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.keyReleased(ke);
+            }
         }
     }
 
     public void mouseClicked(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mouseClicked(me);
 
-            if (obj != null)
-                obj.mouseClicked(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseClicked(me);
+            }
         }
     }
 
     public void mousePressed(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mousePressed(me);
 
-            if (obj != null)
-                obj.mousePressed(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mousePressed(me);
+            }
         }
     }
 
     public void mouseReleased(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mouseReleased(me);
 
-            if (obj != null)
-                obj.mouseReleased(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseReleased(me);
+            }
         }
     }
 
     public void mouseEntered(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mouseEntered(me);
 
-            if (obj != null)
-                obj.mouseEntered(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseEntered(me);
+            }
         }
     }
 
     public void mouseExited(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mouseExited(me);
 
-            if (obj != null)
-                obj.mouseExited(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseExited(me);
+            }
         }
     }
 
     public void mouseDragged(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mouseDragged(me);
 
-            if (obj != null)
-                obj.mouseDragged(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseDragged(me);
+            }
         }
     }
 
     public void mouseMoved(MouseEvent me) {
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
+        if (subscreen != null)
+            subscreen.mouseMoved(me);
 
-            if (obj != null)
-                obj.mouseMoved(me);
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseMoved(me);
+            }
         }
     }
 

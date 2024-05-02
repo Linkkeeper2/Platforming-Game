@@ -100,7 +100,7 @@ public abstract class EntityBody extends GameObject {
     public void kill() {
         alive = false;
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
             Screen.add(new Particle(x + width / 2, y + height / 2, color, (byte) (i % 2)));
 
         xVel = baseXVel;

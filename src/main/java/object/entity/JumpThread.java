@@ -1,5 +1,7 @@
 package main.java.object.entity;
 
+import main.java.screen.Screen;
+
 public class JumpThread extends Thread {
     private EntityBody entity;
 
@@ -16,8 +18,10 @@ public class JumpThread extends Thread {
             } catch (InterruptedException e) {
             }
 
-            entity.y -= (int) jumpheight;
-            jumpheight -= 0.5;
+            if (!Screen.subOn()) {
+                entity.y -= (int) jumpheight;
+                jumpheight -= 0.5;
+            }
         }
 
         entity.jumping = false;

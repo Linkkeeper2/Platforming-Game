@@ -3,8 +3,8 @@ package main.java.screen;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import main.java.MyGame;
 import main.java.object.entity.Player;
+import main.java.screen.sub.PauseScreen;
 
 public abstract class GameScreen extends Screen {
     public GameScreen() {
@@ -16,7 +16,10 @@ public abstract class GameScreen extends Screen {
 
         switch (ke.getKeyCode()) {
             case 27: // ESCAPE
-                MyGame.screen = new StartScreen();
+                if (!Screen.subOn())
+                    Screen.subscreen = new PauseScreen();
+                else
+                    Screen.subscreen = null;
                 break;
         }
     }

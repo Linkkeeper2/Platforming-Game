@@ -12,7 +12,8 @@ public class ParticleThread extends Thread {
 
     public void run() {
         while (particle.y < MyGame.SCREEN_HEIGHT) {
-            particle.update();
+            if (!Screen.subOn())
+                particle.update();
             try {
                 sleep(10);
             } catch (InterruptedException e) {
