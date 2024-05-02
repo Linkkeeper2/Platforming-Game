@@ -3,6 +3,7 @@ package main.java.screen;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import org.bson.Document;
@@ -48,6 +49,16 @@ public class RoomScreen extends GameScreen {
         pen.drawString(roomName, MyGame.SCREEN_WIDTH / 2 - StringUtil.getWidth(pen, roomName) / 2, 62);
         pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 24));
         pen.drawString(level + 1 + "", 8, 32);
+    }
+
+    public void keyPressed(KeyEvent ke) {
+        super.keyPressed(ke);
+
+        if (ke.getKeyCode() == 61) // PLUS/EQUALS
+            MyGame.screen = new RoomScreen(level + 1);
+
+        else if (ke.getKeyCode() == 45) // HYPHEN/UNDERSCORE
+            MyGame.screen = new RoomScreen(level - 1);
     }
 
     public static void loadRoom(int level) {

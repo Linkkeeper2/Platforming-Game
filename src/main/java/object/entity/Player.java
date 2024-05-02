@@ -39,6 +39,11 @@ public class Player extends EntityBody {
             hitbox.updateRect(x, y, width, height);
         }
 
+        else {
+            Screen.globalControls[0] = controls[0];
+            Screen.globalControls[1] = controls[2];
+        }
+
         if (controls[1] && !jumping && canJump) {
             jumping = true;
             canJump = false;
