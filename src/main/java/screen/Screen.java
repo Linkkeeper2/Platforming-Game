@@ -16,9 +16,19 @@ public abstract class Screen {
     public static SubScreen subscreen;
     public static boolean debugMode;
     public static boolean[] globalControls = new boolean[2];
+    protected static ArrayList<Thread> threads;
 
     public Screen() {
         objects = new ArrayList<>();
+
+        if (threads == null)
+            threads = new ArrayList<>();
+        else {
+            for (int i = 0; i < threads.size(); i++)
+                threads.get(i).interrupt();
+
+            threads.clear();
+        }
         Collidable.collidables.clear();
         RoomScreen.resetPoints();
     }
@@ -31,7 +41,7 @@ public abstract class Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj != null)
+            if (obj != null && i < objects.size())
                 obj.draw(pen);
         }
 
@@ -85,6 +95,16 @@ public abstract class Screen {
     }
 
     public void keyReleased(KeyEvent ke) {
+        switch (ke.getKeyCode()) {
+            case 37:
+                globalControls[0] = false;
+                break;
+
+            case 39:
+                globalControls[1] = false;
+                break;
+        }
+
         if (subscreen != null)
             subscreen.keyReleased(ke);
 
@@ -196,6 +216,11 @@ public abstract class Screen {
         }
     }
 
+    public static void addThread(Thread thread) {
+        threads.add(thread);
+        thread.start();
+    }
+
     public static void remove(GameObject obj) {
         objects.remove(obj);
 
@@ -209,5 +234,13 @@ public abstract class Screen {
 
     public static void add(GameObject obj) {
         objects.add(obj);
+    }
+
+    public static boolean contains(GameObject obj) {
+        return objects.contains(obj);
+    }
+
+    public static boolean containsThread(Thread obj) {
+        return threads.contains(obj);
     }
 }

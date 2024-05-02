@@ -24,6 +24,7 @@ public abstract class EntityBody extends GameObject {
         baseXVel = xVel;
         baseYVel = yVel;
         hitbox = new Hitbox(x, y, width, height, Color.GREEN);
+        // new EntityThread(this).start();
     }
 
     public void draw(Graphics pen) {
@@ -100,8 +101,7 @@ public abstract class EntityBody extends GameObject {
     public void kill() {
         alive = false;
 
-        for (int i = 0; i < 15; i++)
-            Screen.add(new Particle(x + width / 2, y + height / 2, color, (byte) (i % 2)));
+        Screen.addThread(new ParticleGenerator(this, 15));
 
         xVel = baseXVel;
         yVel = baseYVel;

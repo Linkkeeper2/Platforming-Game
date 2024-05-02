@@ -17,19 +17,15 @@ import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
 
 public class RoomScreen extends GameScreen {
-    private String roomName;
+    private static String roomName;
     private static StartTile start;
     private static EndTile end;
     private int level;
 
     public RoomScreen(int level) {
         this.level = level;
-        this.roomName = "Test";
-
-        if (!renderLevel(level)) {
-            for (int i = 0; i < MyGame.SCREEN_WIDTH / 64; i++)
-                objects.add(new Platform(i * 64, 512, 64, 64, Color.GRAY, BlockType.SOLID));
-        }
+        roomName = "Base Room";
+        loadRoom(level);
     }
 
     @SuppressWarnings("static-access")
@@ -52,7 +48,14 @@ public class RoomScreen extends GameScreen {
         pen.drawString(roomName, MyGame.SCREEN_WIDTH / 2 - StringUtil.getWidth(pen, roomName) / 2, 62);
     }
 
-    private boolean renderLevel(int level) {
+    public static void loadRoom(int level) {
+        if (!renderLevel(level)) {
+            for (int i = 0; i < MyGame.SCREEN_WIDTH / 64; i++)
+                objects.add(new Platform(i * 64, 512, 64, 64, Color.GRAY, BlockType.SOLID));
+        }
+    }
+
+    private static boolean renderLevel(int level) {
         Document lvl = MyGame.database.getLevel(level);
 
         if (lvl == null)
@@ -76,8 +79,16 @@ public class RoomScreen extends GameScreen {
 
                     case "2":
                         start = new StartTile(k * 64, i * 64);
-                        Player.main.x = start.x;
-                        Player.main.y = start.y;
+
+                        if (MyGame.screen instanceof EditorScreen) {
+                            objects.add(start);
+                            EditorScreen.start = start;
+                        }
+
+                        if (Player.main != null) {
+                            Player.main.x = start.x;
+                            Player.main.y = start.y;
+                        }
                         break;
 
                     case "3":

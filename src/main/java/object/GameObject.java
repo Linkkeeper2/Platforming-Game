@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 public abstract class GameObject {
     public int x, y;
     public int width, height;
-    protected Color color;
+    public Color color;
     protected Color normalColor;
     protected byte direction;
     protected BufferedImage sprite;
@@ -135,7 +135,7 @@ public abstract class GameObject {
         return new Rectangle(x + 1, y + this.height - height, width - 1, height);
     }
 
-    protected void setSprite(String path) {
+    public void setSprite(String path) {
         try {
             if (!path.equals("")) {
                 sprite = ImageIO.read(new File(path));

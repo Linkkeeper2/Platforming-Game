@@ -11,7 +11,7 @@ public class Spike extends Collidable {
         super(x, y, 64, 64, null);
 
         if (rotation != 0) {
-            setSprite("./gfx/Objects/Death/Spike" + rotation + ".png");
+            setSprite("./gfx/Objects/Spike" + rotation + ".png");
 
             switch (rotation) {
                 case 180:
@@ -29,7 +29,7 @@ public class Spike extends Collidable {
         }
 
         else {
-            setSprite("./gfx/Objects/Death/Spike.png");
+            setSprite("./gfx/Objects/Spike.png");
             this.hitbox = new Hitbox(x + 16, y + 12, width - 32, height - 12, Color.RED);
         }
     }

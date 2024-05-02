@@ -1,12 +1,14 @@
 package main.java.screen;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import main.java.MyGame;
 import main.java.object.GameObject;
+import main.java.object.GhostObject;
 import main.java.object.block.BlockType;
 import main.java.object.block.Collidable;
 import main.java.object.block.Platform;
@@ -20,6 +22,7 @@ import main.java.screen.gui.Overlay;
 import main.java.screen.gui.TextBox;
 import main.java.screen.gui.button.BackToMenu;
 import main.java.screen.gui.button.ButtonAction;
+import main.java.screen.gui.button.LoadMap;
 import main.java.screen.gui.button.ResetEditor;
 import main.java.screen.gui.text.SaveThread;
 
@@ -30,10 +33,12 @@ public class EditorScreen extends Screen {
     public static StartTile start;
     private EndTile end;
     private int rotation;
+    private GhostObject selectedObject;
 
     public EditorScreen() {
         object = "Block";
         level = new ArrayList<>();
+        Player.main = null;
 
         objects.add(new Grid(0, 0, 64, 64, MyGame.SCREEN_HEIGHT / 64, MyGame.SCREEN_WIDTH / 64));
 
@@ -49,17 +54,27 @@ public class EditorScreen extends Screen {
 
         objects.add(new Button(490, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Test Level", new Test()));
 
-        objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", new SwapObject("Block")));
+        objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Load Level", new LoadMap()));
 
-        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
-        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", "./gfx/Editor/Flag.png",
+        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", new SwapObject("Block")));
+
+        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
+        objects.add(new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", "./gfx/Editor/Flag.png",
                 new SwapObject("End")));
 
         objects.add(
-                new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike",
+                new Button(1290, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike",
                         "./gfx/Editor/Death/Spike.png", new SwapObject("Spike")));
 
+        selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
         genBaseMap();
+    }
+
+    public void draw(Graphics pen) {
+        super.draw(pen);
+
+        if (selectedObject.y < MyGame.SCREEN_HEIGHT - 128 && !isObject(x - (x % 64), y - (y % 64)))
+            selectedObject.draw(pen);
     }
 
     public void keyPressed(KeyEvent ke) {
@@ -75,6 +90,8 @@ public class EditorScreen extends Screen {
 
                 if (rotation == 360)
                     rotation = 0;
+
+                setGhost();
                 break;
         }
     }
@@ -102,8 +119,28 @@ public class EditorScreen extends Screen {
         }
     }
 
+    public void mouseMoved(MouseEvent me) {
+        super.mouseMoved(me);
+
+        updateMouse(me);
+    }
+
     public void swap(String obj) {
         object = obj;
+
+        switch (object) {
+            case "Start":
+                selectedObject = new GhostObject(x, y, new Color(0, 255, 0, 64));
+                break;
+
+            case "End":
+                selectedObject = new GhostObject(x, y, "./gfx/Objects/Flag.png");
+                break;
+
+            default:
+                setGhost();
+                break;
+        }
     }
 
     public void genBaseMap() {
@@ -119,6 +156,20 @@ public class EditorScreen extends Screen {
 
             level.add(row);
         }
+    }
+
+    private void setGhost() {
+        if (object.equals("Block")) {
+            selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
+            return;
+        }
+
+        String path = "./gfx/Objects/" + object;
+
+        if (rotation != 0 && object.equals("Spike"))
+            path += rotation + "";
+
+        selectedObject = new GhostObject(x - (x % 64), y - (y % 64), path + ".png");
     }
 
     private void setTile(int row, int col, int type) {
@@ -212,9 +263,27 @@ public class EditorScreen extends Screen {
         }
     }
 
+    private boolean isObject(int x, int y) {
+        if (!(y < MyGame.SCREEN_HEIGHT - 128))
+            return false;
+
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject obj = objects.get(i);
+
+            if (obj != null && obj.x == x - (x % 64) && obj.y == y - (y % 64) && !(obj instanceof Grid)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void updateMouse(MouseEvent me) {
         x = me.getX() - 8;
         y = me.getY() - 32;
+
+        selectedObject.x = x - (x % 64);
+        selectedObject.y = y - (y % 64);
     }
 
     private class SaveMap implements ButtonAction {
