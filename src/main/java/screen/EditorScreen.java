@@ -59,7 +59,8 @@ public class EditorScreen extends Screen {
 
         objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Load Level", new LoadMap()));
 
-        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", new SwapObject("Block")));
+        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", "./gfx/Editor/Block.png",
+                new SwapObject("Block")));
 
         objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
         objects.add(new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", "./gfx/Editor/Flag.png",
@@ -173,8 +174,8 @@ public class EditorScreen extends Screen {
     }
 
     private void setGhost() {
-        if (object.contains("Block")) {
-            selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
+        if (object.equals("Moving Block")) {
+            selectedObject = new GhostObject(x, y, new Color(0, 255, 255, 64));
             return;
         }
 

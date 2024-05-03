@@ -11,6 +11,7 @@ public class Platform extends Collidable {
         super(x, y, width, height, color);
 
         this.type = type;
+        setSprite("./gfx/Objects/Block.png");
     }
 
     public boolean[] getCollisions(GameObject g) {
