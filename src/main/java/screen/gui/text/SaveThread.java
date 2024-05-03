@@ -17,11 +17,11 @@ public class SaveThread extends Thread {
     }
 
     public void run() {
-        while (!box.isSubmitted() && MyGame.screen instanceof EditorScreen) {
+        while (!box.isSubmitted() && MyGame.screen instanceof EditorScreen && Screen.contains(box)) {
             System.out.print("");
         }
 
-        if (!(MyGame.screen instanceof EditorScreen))
+        if (!(MyGame.screen instanceof EditorScreen) || !Screen.contains(box))
             return;
 
         MyGame.database.createLevel(box.getContents(), level);

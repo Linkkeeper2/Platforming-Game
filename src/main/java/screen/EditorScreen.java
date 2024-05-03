@@ -296,11 +296,18 @@ public class EditorScreen extends Screen {
     }
 
     private class SaveMap implements ButtonAction {
+        private TextBox box;
+
         public void action() {
-            TextBox box = new TextBox(8, MyGame.SCREEN_HEIGHT - 160, 250, "Level Name:");
-            objects.add(box);
-            new SaveThread(box, level).start();
-            // MyGame.status.addMessage("Map Saved!", 5000);
+            if (box == null) {
+                box = new TextBox(8, MyGame.SCREEN_HEIGHT - 160, 250, "Level Name:");
+                objects.add(box);
+                new SaveThread(box, level).start();
+                // MyGame.status.addMessage("Map Saved!", 5000);
+            } else {
+                Screen.remove(box);
+                box = null;
+            }
         }
     }
 

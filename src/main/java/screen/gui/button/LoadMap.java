@@ -7,10 +7,16 @@ import main.java.screen.gui.text.LoadThread;
 
 public class LoadMap implements ButtonAction {
     public static int level;
+    private TextBox box;
 
     public void action() {
-        TextBox box = new TextBox(650, MyGame.SCREEN_HEIGHT - 160, 250, "Level Number:");
-        Screen.add(box);
-        new LoadThread(box).start();
+        if (box == null) {
+            box = new TextBox(650, MyGame.SCREEN_HEIGHT - 160, 250, "Level Number:");
+            Screen.add(box);
+            new LoadThread(box).start();
+        } else {
+            Screen.remove(box);
+            box = null;
+        }
     }
 }
