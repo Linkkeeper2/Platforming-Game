@@ -2,7 +2,6 @@ package main.java.screen;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -241,8 +240,7 @@ public class EditorScreen extends Screen {
                     break;
 
                 case "Moving Block":
-                    objects.add(new MovingPlatform(x - (x % 64), y - (y % 64), 5, new Point(x - (x % 64), y - (y % 64)),
-                            new Point(x - (x % 64) - 256, y - y % 64)));
+                    objects.add(new MovingPlatform(x - (x % 64), y - (y % 64), 5));
                     setTile(row, col, 8);
                     break;
             }

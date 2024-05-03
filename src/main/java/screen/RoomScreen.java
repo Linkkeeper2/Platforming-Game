@@ -11,6 +11,7 @@ import org.bson.Document;
 import linkk.util.StringUtil;
 import main.java.MyGame;
 import main.java.object.block.BlockType;
+import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
 import main.java.object.entity.Player;
@@ -112,6 +113,10 @@ public class RoomScreen extends GameScreen {
                     case "3":
                         end = new EndTile(k * 64, i * 64);
                         objects.add(end);
+                        break;
+
+                    case "8":
+                        objects.add(new MovingPlatform(k * 64, i * 64, 5));
                         break;
                 }
 
