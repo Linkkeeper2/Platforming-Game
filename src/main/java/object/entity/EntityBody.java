@@ -2,9 +2,11 @@ package main.java.object.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import main.java.MyGame;
+import main.java.base.AbilityBase;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
 import main.java.object.meta.Hitbox;
@@ -17,6 +19,7 @@ public abstract class EntityBody extends GameObject {
     protected short baseXVel, baseYVel;
     protected Hitbox hitbox;
     protected byte gravity;
+    protected AbilityBase ability;
 
     public EntityBody(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -136,5 +139,18 @@ public abstract class EntityBody extends GameObject {
         jumping = false;
         canJump = false;
         alive = true;
+    }
+
+    public boolean isJumping() {
+        return jumping;
+    }
+
+    public byte getGravity() {
+        return gravity;
+    }
+
+    public void keyPressed(KeyEvent ke) {
+        if (ability != null)
+            ability.keyPressed(ke);
     }
 }

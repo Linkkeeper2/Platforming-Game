@@ -75,6 +75,8 @@ public class Player extends EntityBody {
     }
 
     public void keyPressed(KeyEvent ke) {
+        super.keyPressed(ke);
+
         switch (ke.getKeyCode()) {
             case 37: // LEFT
                 controls[0] = true;
