@@ -295,6 +295,10 @@ public class EditorScreen extends Screen {
         selectedObject.y = y - (y % 64);
     }
 
+    public void setLevel(ArrayList<String> level) {
+        this.level = level;
+    }
+
     private class SaveMap implements ButtonAction {
         private TextBox box;
 

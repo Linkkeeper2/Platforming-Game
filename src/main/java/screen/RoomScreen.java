@@ -79,6 +79,11 @@ public class RoomScreen extends GameScreen {
         @SuppressWarnings("unchecked")
         ArrayList<String> data = (ArrayList<String>) lvl.get("data");
 
+        if (MyGame.screen instanceof EditorScreen) {
+            EditorScreen e = (EditorScreen) MyGame.screen;
+            e.setLevel(data);
+        }
+
         for (int i = 0; i < data.size(); i++) {
             String row = data.get(i);
 
