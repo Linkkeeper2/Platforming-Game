@@ -158,6 +158,7 @@ public class Database {
                 .append("data", Arrays.asList(levelLayout));
 
         collection.insertOne(doc);
+        refreshLevels();
     }
 
     public Document getLevel(int level) {
