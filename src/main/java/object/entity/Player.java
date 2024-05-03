@@ -1,21 +1,29 @@
 package main.java.object.entity;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import linkk.manager.SoundManager;
 import linkk.manager.SpriteSheetManager;
 import linkk.manager.SpriteSheetManager.SpriteSheet;
+import linkk.util.StringUtil;
+import main.java.MyGame;
 import main.java.screen.RoomScreen;
 import main.java.screen.Screen;
+import main.java.server.Account;
 
 public class Player extends EntityBody {
     private boolean[] controls;
     public static Player main;
     private SpriteSheet sprites;
+    protected String name;
+    public static ArrayList<Player> players = new ArrayList<>();
+    protected int currLevel;
 
     public Player(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -33,6 +41,23 @@ public class Player extends EntityBody {
         alive = true;
         sprites = SpriteSheetManager.getSheet("Player");
         sprite = sprites.getSprite(0);
+        name = Account.name;
+    }
+
+    public Player(int x, int y, String name) {
+        super(x, y, 50, 50, new Color(0, 100, 255));
+        controls = new boolean[3];
+        alive = true;
+        sprites = SpriteSheetManager.getSheet("Player");
+        sprite = sprites.getSprite(0);
+        this.name = name;
+        players.add(this);
+    }
+
+    public void draw(Graphics pen) {
+        super.draw(pen);
+        pen.setColor(Color.BLACK);
+        pen.drawString(name, x + width / 2 - StringUtil.getWidth(pen, name) / 2, y - 24);
     }
 
     public void update() {
@@ -119,5 +144,22 @@ public class Player extends EntityBody {
                 sprite = sprites.getSprite(0);
                 break;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return currLevel;
+    }
+
+    public void setLevel(int lvl) {
+        currLevel = lvl;
+    }
+
+    public static void updatePlayers() {
+        for (int i = 0; i < players.size(); i++)
+            MyGame.database.updatePlayer(players.get(i));
     }
 }

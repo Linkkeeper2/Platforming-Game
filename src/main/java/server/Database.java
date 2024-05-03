@@ -5,11 +5,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Updates;
+
+import main.java.object.entity.GhostPlayer;
+import main.java.object.entity.Player;
+import main.java.screen.Screen;
 
 public class Database {
     private MongoClient client;
@@ -178,5 +184,107 @@ public class Database {
         levels = new ArrayList<>();
 
         collection.find().into(levels);
+    }
+
+    public void addPlayer(String name) {
+        collection = database.getCollection("Server");
+
+        Document doc = new Document()
+                .append("name", name)
+                .append("x", 0)
+                .append("y", 0)
+                .append("direction", 0)
+                .append("level", 0);
+
+        collection.insertOne(doc);
+    }
+
+    public void addPlayers() {
+        collection = database.getCollection("Server");
+
+        ArrayList<Document> documents = new ArrayList<>();
+        ArrayList<Boolean> checks = new ArrayList<>();
+
+        collection.find().into(documents);
+
+        for (int i = 0; i < documents.size(); i++)
+            checks.add(false);
+
+        for (int i = 0; i < documents.size(); i++) {
+            Document doc = documents.get(i);
+
+            for (int k = 0; k < Player.players.size(); k++) {
+                Player player = Player.players.get(k);
+
+                if (player.getName().equals(doc.getString("name")))
+                    checks.set(i, true);
+            }
+        }
+
+        for (int i = 0; i < documents.size(); i++) {
+            Document doc = documents.get(i);
+
+            if (checks.get(i).equals(false) && !doc.getString("name").equals(Player.main.getName())) {
+                GhostPlayer g = new GhostPlayer(doc.getInteger("x"), doc.getInteger("y"),
+                        doc.getString("name"));
+                Screen.add(g);
+            }
+        }
+    }
+
+    public void removePlayer(String name) {
+        collection = database.getCollection("Server");
+
+        Document query = new Document().append("name", name);
+
+        collection.deleteOne(query);
+    }
+
+    public void updatePlayer(Player player) {
+        collection = database.getCollection("Server");
+
+        ArrayList<Document> documents = new ArrayList<>();
+        ArrayList<Boolean> checks = new ArrayList<>();
+
+        collection.find().into(documents);
+
+        int updatedIndex = -1;
+
+        for (int i = 0; i < documents.size(); i++)
+            checks.add(false);
+
+        for (int i = 0; i < documents.size(); i++) {
+            Document doc = documents.get(i);
+
+            if (player.getName().equals(doc.getString("name"))) {
+                player.x = doc.getInteger("x");
+                player.y = doc.getInteger("y");
+                player.direction = doc.getInteger("direction");
+                player.setLevel(doc.getInteger("level"));
+                checks.set(i, true);
+                updatedIndex = i;
+                break;
+            }
+        }
+
+        if (updatedIndex == -1) {
+            System.out.println("hey");
+            Player.players.remove(player);
+            Screen.remove(player);
+        }
+    }
+
+    public void updateMain() {
+        collection = database.getCollection("Server");
+
+        Bson updates = Updates.combine(
+                Updates.set("x", Player.main.x),
+                Updates.set("y", Player.main.y),
+                Updates.set("direction", (int) Player.main.direction),
+                Updates.set("level", Player.main.getLevel()));
+
+        Document query = new Document().append("name", Player.main.getName());
+
+        collection.updateOne(query, updates);
     }
 }

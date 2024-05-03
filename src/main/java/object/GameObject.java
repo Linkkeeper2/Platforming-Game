@@ -17,7 +17,7 @@ public abstract class GameObject {
     public int width, height;
     public Color color;
     protected Color normalColor;
-    public byte direction;
+    public int direction;
     protected BufferedImage sprite;
 
     public GameObject(int x, int y, int width, int height, Color color) {
