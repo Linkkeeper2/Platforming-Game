@@ -25,6 +25,7 @@ public class SaveThread extends Thread {
             return;
 
         MyGame.database.createLevel(box.getContents(), level);
+        MyGame.status.addMessage("Level Saved!", 5000);
 
         Screen.remove(box);
     }

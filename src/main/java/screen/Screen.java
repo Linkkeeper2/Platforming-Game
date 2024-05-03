@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
 import main.java.object.entity.Particle;
@@ -38,6 +39,8 @@ public abstract class Screen {
     }
 
     public void draw(Graphics pen) {
+        MyGame.status.draw(pen);
+
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 

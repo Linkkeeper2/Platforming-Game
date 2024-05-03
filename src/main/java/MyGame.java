@@ -8,6 +8,7 @@ import java.util.Timer;
 import main.java.screen.Screen;
 import main.java.screen.StartScreen;
 import main.java.server.Database;
+import main.java.server.ServerStatus;
 
 public class MyGame extends Game {
     public static final String TITLE = "Platforming Game";
@@ -17,6 +18,7 @@ public class MyGame extends Game {
     public static Timer timer = new Timer();
     public static Screen screen;
     public static Database database;
+    public static ServerStatus status = new ServerStatus();
 
     public MyGame() {
         screen = new StartScreen();

@@ -29,9 +29,13 @@ public class LoadThread extends Thread {
 
             RoomScreen.loadRoom(level);
 
+            MyGame.status.addMessage("Map loaded successfully!", 5000);
+
             Screen.remove(box);
         } catch (NumberFormatException e) {
-
+            MyGame.status.addMessage("Could not load map.", 5000);
+            Screen.remove(box);
+            box = null;
         }
     }
 }

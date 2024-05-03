@@ -10,6 +10,9 @@ public class LoadMap implements ButtonAction {
     private TextBox box;
 
     public void action() {
+        if (!Screen.contains(box))
+            box = null;
+
         if (box == null) {
             box = new TextBox(650, MyGame.SCREEN_HEIGHT - 160, 250, "Level Number:");
             Screen.add(box);
