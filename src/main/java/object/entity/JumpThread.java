@@ -19,7 +19,7 @@ public class JumpThread extends Thread {
             }
 
             if (!Screen.subOn()) {
-                entity.y -= (int) jumpheight;
+                entity.y -= (int) jumpheight * entity.gravity;
                 jumpheight -= 0.5;
             }
         }

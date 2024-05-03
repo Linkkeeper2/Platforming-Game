@@ -16,6 +16,7 @@ public abstract class EntityBody extends GameObject {
     protected short xVel, yVel;
     protected short baseXVel, baseYVel;
     protected Hitbox hitbox;
+    protected byte gravity;
 
     public EntityBody(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -25,6 +26,7 @@ public abstract class EntityBody extends GameObject {
         baseYVel = yVel;
         hitbox = new Hitbox(x, y, width, height, Color.GREEN);
         // new EntityThread(this).start();
+        gravity = 1;
     }
 
     public void draw(Graphics pen) {
@@ -40,7 +42,10 @@ public abstract class EntityBody extends GameObject {
         else
             hitbox.updateRect(x, y - yVel, width, height);
 
-        if (y >= MyGame.SCREEN_HEIGHT)
+        if (y >= MyGame.SCREEN_HEIGHT && gravity == 1)
+            kill();
+
+        else if (y < -height && gravity == -1)
             kill();
 
         collisions();
@@ -70,28 +75,44 @@ public abstract class EntityBody extends GameObject {
 
             if (intersections[1]) {
                 this.y = platform.y - this.height;
-                canJump = true;
-                unflag = false;
-                side = false;
+                if (gravity == 1) {
+                    canJump = true;
+                    unflag = false;
+                    side = false;
+                } else
+                    jumping = false;
             }
 
             boolean bottom = true;
 
             if (intersections[0] && side) {
                 this.x = platform.x - this.width;
-                canJump = false;
-                bottom = false;
+
+                if (gravity == 1) {
+                    canJump = false;
+                    bottom = false;
+                }
             }
 
             if (intersections[2] && side) {
                 this.x = platform.x + platform.width;
-                canJump = false;
-                bottom = false;
+
+                if (gravity == 1) {
+                    canJump = false;
+                    bottom = false;
+                }
             }
 
             if (intersections[3] && bottom) {
                 this.y = platform.y + platform.height;
-                jumping = false;
+
+                if (gravity == 1)
+                    jumping = false;
+                else {
+                    canJump = true;
+                    unflag = false;
+                    side = false;
+                }
             }
 
             hitbox.updateRect(x, y, width, height);

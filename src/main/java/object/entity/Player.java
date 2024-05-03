@@ -36,7 +36,7 @@ public class Player extends EntityBody {
     }
 
     public void update() {
-        y += yVel;
+        y += yVel * gravity;
 
         controls();
         super.update();
