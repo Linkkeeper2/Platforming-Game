@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 public abstract class GameObject {
     public int x, y;
+    public int originX, originY;
     public int width, height;
     public Color color;
     protected Color normalColor;
@@ -22,6 +23,8 @@ public abstract class GameObject {
     public GameObject(int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
+        this.originX = x;
+        this.originY = y;
         this.width = width;
         this.height = height;
         this.color = color;

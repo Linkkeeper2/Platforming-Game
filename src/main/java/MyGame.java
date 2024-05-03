@@ -3,8 +3,11 @@ package main.java;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Timer;
 
+import linkk.collection.DuplicateKeyException;
+import linkk.manager.SpriteSheetManager;
 import main.java.screen.Screen;
 import main.java.screen.StartScreen;
 import main.java.server.Database;
@@ -23,6 +26,15 @@ public class MyGame extends Game {
     public MyGame() {
         screen = new StartScreen();
         database = new Database();
+        initSprites();
+    }
+
+    public void initSprites() {
+        try {
+            SpriteSheetManager.addSheet("Player", 50, 50, "./gfx/Player/Player.png");
+        } catch (IOException | DuplicateKeyException e) {
+            status.addMessage("Failed to load sprites.", 5000);
+        }
     }
 
     public void update() {

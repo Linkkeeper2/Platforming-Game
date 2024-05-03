@@ -7,12 +7,15 @@ import java.io.IOException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import linkk.manager.SoundManager;
+import linkk.manager.SpriteSheetManager;
+import linkk.manager.SpriteSheetManager.SpriteSheet;
 import main.java.screen.RoomScreen;
 import main.java.screen.Screen;
 
 public class Player extends EntityBody {
     private boolean[] controls;
     public static Player main;
+    private SpriteSheet sprites;
 
     public Player(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -28,6 +31,8 @@ public class Player extends EntityBody {
 
         main = this;
         alive = true;
+        sprites = SpriteSheetManager.getSheet("Player");
+        sprite = sprites.getSprite(0);
     }
 
     public void update() {
@@ -41,6 +46,11 @@ public class Player extends EntityBody {
         if (controls[0] || controls[2]) {
             x += xVel * direction;
             hitbox.updateRect(x, y, width, height);
+
+            if (direction == 1)
+                sprite = sprites.getSprite(1);
+            else if (direction == -1)
+                sprite = sprites.getSprite(2);
         }
 
         else {
@@ -70,16 +80,19 @@ public class Player extends EntityBody {
                 controls[0] = true;
                 Screen.globalControls[0] = true;
                 direction = -1;
+                sprite = sprites.getSprite(2);
                 break;
 
             case 38: // UP
                 controls[1] = true;
+                sprite = sprites.getSprite(3);
                 break;
 
             case 39: // RIGHT
                 controls[2] = true;
                 Screen.globalControls[1] = true;
                 direction = 1;
+                sprite = sprites.getSprite(1);
                 break;
         }
     }
@@ -89,16 +102,19 @@ public class Player extends EntityBody {
             case 37: // LEFT
                 controls[0] = false;
                 Screen.globalControls[0] = false;
+                sprite = sprites.getSprite(0);
                 break;
 
             case 38: // UP
                 controls[1] = false;
                 jumping = false;
+                sprite = sprites.getSprite(0);
                 break;
 
             case 39: // RIGHT
                 controls[2] = false;
                 Screen.globalControls[1] = true;
+                sprite = sprites.getSprite(0);
                 break;
         }
     }
