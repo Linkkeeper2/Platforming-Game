@@ -244,6 +244,8 @@ public class EditorScreen extends Screen {
                     setTile(row, col, 8);
                     break;
             }
+
+            Screen.updateAdjacent();
         }
     }
 
@@ -272,6 +274,8 @@ public class EditorScreen extends Screen {
                     end = null;
             }
         }
+
+        Screen.updateAdjacent();
     }
 
     private boolean isObject(int x, int y) {

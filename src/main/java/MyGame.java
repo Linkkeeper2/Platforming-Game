@@ -46,6 +46,7 @@ public class MyGame extends Game {
     }
 
     public void keyTyped(KeyEvent ke) {
+        screen.keyTyped(ke);
     }
 
     public void keyPressed(KeyEvent ke) {
@@ -69,9 +70,11 @@ public class MyGame extends Game {
     }
 
     public void mouseEntered(MouseEvent me) {
+        screen.mouseEntered(me);
     }
 
     public void mouseExited(MouseEvent me) {
+        screen.mouseExited(me);
     }
 
     public void mouseDragged(MouseEvent me) {

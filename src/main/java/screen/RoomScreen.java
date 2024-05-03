@@ -10,7 +10,9 @@ import org.bson.Document;
 
 import linkk.util.StringUtil;
 import main.java.MyGame;
+import main.java.object.GameObject;
 import main.java.object.block.BlockType;
+import main.java.object.block.Collidable;
 import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
@@ -126,6 +128,18 @@ public class RoomScreen extends GameScreen {
 
                 if (Integer.parseInt(tile) >= 4 && Integer.parseInt(tile) <= 7)
                     objects.add(new Spike(k * 64, i * 64, (Integer.parseInt(tile) - 4) * 90));
+            }
+        }
+
+        ArrayList<GameObject> objects = Screen.objects;
+
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject obj = objects.get(i);
+
+            if (obj != null && obj instanceof Collidable) {
+                Collidable c = (Collidable) obj;
+
+                c.setEnabled();
             }
         }
 

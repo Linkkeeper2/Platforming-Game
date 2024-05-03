@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
+import main.java.object.block.MovingPlatform;
+import main.java.object.block.Platform;
 import main.java.object.entity.Particle;
 import main.java.object.entity.Player;
 import main.java.screen.sub.SubScreen;
@@ -245,5 +247,41 @@ public abstract class Screen {
 
     public static boolean containsThread(Thread obj) {
         return threads.contains(obj);
+    }
+
+    public static boolean[] getAdjacent(GameObject g) {
+        boolean[] adjacent = new boolean[4];
+
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject obj = objects.get(i);
+
+            if (obj != null && obj instanceof Platform && !(obj instanceof MovingPlatform)) {
+                if (obj.x == g.x - 64 && obj.y == g.y)
+                    adjacent[0] = true;
+
+                else if (obj.x == g.x + 64 && obj.y == g.y)
+                    adjacent[2] = true;
+
+                else if (obj.y == g.y - 64 && obj.x == g.x)
+                    adjacent[1] = true;
+
+                else if (obj.y == g.y + 64 && obj.x == g.x)
+                    adjacent[3] = true;
+            }
+        }
+
+        return adjacent;
+    }
+
+    public static void updateAdjacent() {
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject obj = objects.get(i);
+
+            if (obj != null && obj instanceof Collidable) {
+                Collidable c = (Collidable) obj;
+
+                c.setEnabled();
+            }
+        }
     }
 }
