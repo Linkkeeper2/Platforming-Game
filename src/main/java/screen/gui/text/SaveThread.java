@@ -24,8 +24,11 @@ public class SaveThread extends Thread {
         if (!(MyGame.screen instanceof EditorScreen) || !Screen.contains(box))
             return;
 
-        MyGame.database.createLevel(box.getContents(), level);
-        MyGame.status.addMessage("Level Saved!", 5000);
+        if (Screen.contains(EditorScreen.start) && Screen.contains(EditorScreen.end)) {
+            MyGame.database.createLevel(box.getContents(), level);
+            MyGame.status.addMessage("Level Saved!", 5000);
+        } else
+            MyGame.status.addMessage("Level must have a Start & End point.", 5000);
 
         Screen.remove(box);
     }

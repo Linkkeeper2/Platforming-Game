@@ -32,7 +32,7 @@ public class EditorScreen extends Screen {
     private ArrayList<String> level;
     private int x, y;
     public static StartTile start;
-    private EndTile end;
+    public static EndTile end;
     private int rotation;
     private GhostObject selectedObject;
     private ArrayList<String> rotatables;

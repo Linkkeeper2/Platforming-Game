@@ -113,6 +113,10 @@ public class RoomScreen extends GameScreen {
                     case "3":
                         end = new EndTile(k * 64, i * 64);
                         objects.add(end);
+
+                        if (MyGame.screen instanceof EditorScreen) {
+                            EditorScreen.end = end;
+                        }
                         break;
 
                     case "8":
