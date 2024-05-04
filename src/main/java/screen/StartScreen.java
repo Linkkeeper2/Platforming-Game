@@ -19,5 +19,7 @@ public class StartScreen extends Screen {
 
         if (Player.main != null)
             MyGame.database.removePlayer(Account.name);
+
+        GameScreen.clock = null;
     }
 }
