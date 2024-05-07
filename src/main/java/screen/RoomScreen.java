@@ -29,6 +29,7 @@ public class RoomScreen extends GameScreen {
     public RoomScreen(int level) {
         this.level = level;
         Player.main.setLevel(level);
+        Player.addPlayers();
         roomName = "Base Room";
         loadRoom(level);
     }

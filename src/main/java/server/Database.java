@@ -268,7 +268,6 @@ public class Database {
         }
 
         if (updatedIndex == -1) {
-            System.out.println("hey");
             Player.players.remove(player);
             Screen.remove(player);
         }

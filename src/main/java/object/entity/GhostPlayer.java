@@ -22,6 +22,7 @@ public class GhostPlayer extends Player {
 
             g.drawImage(sprite, x, y, null);
             g.drawString(name, x + width / 2 - StringUtil.getWidth(g, name) / 2, y - 24);
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
 
         else if (this.color != null) {

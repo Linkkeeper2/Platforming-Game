@@ -162,4 +162,9 @@ public class Player extends EntityBody {
         for (int i = 0; i < players.size(); i++)
             MyGame.database.updatePlayer(players.get(i));
     }
+
+    public static void addPlayers() {
+        for (int i = 0; i < players.size(); i++)
+            Screen.add(players.get(i));
+    }
 }

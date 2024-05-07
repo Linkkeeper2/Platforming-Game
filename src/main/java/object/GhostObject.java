@@ -21,6 +21,7 @@ public class GhostObject extends GameObject {
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));
 
             g.drawImage(sprite, x, y, null);
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
 
         else if (this.color != null) {
