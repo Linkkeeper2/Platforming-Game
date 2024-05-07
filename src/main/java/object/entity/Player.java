@@ -96,6 +96,10 @@ public class Player extends EntityBody {
         try {
             SoundManager.playSound("./sfx/Player/Death.wav", 0);
         } catch (NullPointerException | UnsupportedAudioFileException | IOException e) {
+        } catch (IllegalStateException e) {
+            SoundManager.setVolume(0);
+            MyGame.status.addMessage("Sounds failed to load.");
+            MyGame.status.addMessage("Game volume has been set to 0.");
         }
     }
 
