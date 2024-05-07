@@ -52,6 +52,8 @@ public abstract class Screen {
 
         if (subscreen != null)
             subscreen.draw(pen);
+
+        MyGame.fps.draw(pen);
     }
 
     public void update() {
@@ -66,6 +68,8 @@ public abstract class Screen {
                     obj.update();
             }
         }
+
+        MyGame.fps.update();
     }
 
     public void keyTyped(KeyEvent ke) {

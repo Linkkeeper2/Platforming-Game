@@ -1,5 +1,6 @@
 package main.java;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -10,6 +11,7 @@ import linkk.collection.DuplicateKeyException;
 import linkk.manager.SpriteSheetManager;
 import main.java.screen.Screen;
 import main.java.screen.StartScreen;
+import main.java.screen.gui.FPSCounter;
 import main.java.server.Database;
 import main.java.server.ServerStatus;
 
@@ -22,11 +24,13 @@ public class MyGame extends Game {
     public static Screen screen;
     public static Database database;
     public static ServerStatus status = new ServerStatus();
+    public static FPSCounter fps = new FPSCounter(SCREEN_WIDTH - 100, 24, Color.BLACK);
 
     public MyGame() {
         screen = new StartScreen();
         database = new Database();
         initSprites();
+        fps.start();
     }
 
     public void initSprites() {
