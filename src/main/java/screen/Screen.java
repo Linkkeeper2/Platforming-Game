@@ -46,7 +46,8 @@ public abstract class Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj != null && i < objects.size())
+            if (obj != null && i < objects.size() && obj.x >= 0 && obj.y - obj.height <= MyGame.SCREEN_HEIGHT
+                    && obj.y >= 0 && obj.x - obj.width <= MyGame.SCREEN_WIDTH)
                 obj.draw(pen);
         }
 
