@@ -281,7 +281,7 @@ public abstract class Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj != null && obj instanceof Collidable) {
+            if (obj != null && obj instanceof Collidable && !(obj instanceof MovingPlatform)) {
                 Collidable c = (Collidable) obj;
 
                 c.setEnabled();
