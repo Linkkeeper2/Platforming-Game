@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Font;
 
+import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.screen.Screen;
 
@@ -77,7 +78,8 @@ public class Clock extends GameObject {
                 }
 
                 if (!Screen.subOn()) {
-                    milliseconds += 10;
+                    double add = 1000 / (double) MyGame.fps.getFPS();
+                    milliseconds += add;
 
                     adjustClock();
                 }

@@ -51,4 +51,8 @@ public class FPSCounter extends GameObject {
     public void stop() {
         running = false;
     }
+
+    public int getFPS() {
+        return fps;
+    }
 }
