@@ -170,4 +170,8 @@ public class RoomScreen extends GameScreen {
         start = null;
         end = null;
     }
+
+    public static String getRoomName() {
+        return roomName;
+    }
 }

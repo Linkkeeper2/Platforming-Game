@@ -29,7 +29,7 @@ public class LoadThread extends Thread {
 
             RoomScreen.loadRoom(level);
 
-            MyGame.status.addMessage("Map loaded successfully!", 5000);
+            MyGame.status.addMessage("Map, " + RoomScreen.getRoomName() + ", loaded successfully!", 5000);
 
             Screen.remove(box);
         } catch (NumberFormatException e) {
