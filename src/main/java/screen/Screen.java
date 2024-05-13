@@ -46,8 +46,7 @@ public abstract class Screen {
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
-            if (obj != null && i < objects.size() && obj.x >= 0 && obj.y - obj.height <= MyGame.SCREEN_HEIGHT
-                    && obj.y >= 0 && obj.x - obj.width <= MyGame.SCREEN_WIDTH)
+            if (obj != null && i < objects.size() && onScreen(obj))
                 obj.draw(pen);
         }
 
@@ -288,5 +287,10 @@ public abstract class Screen {
                 c.setEnabled();
             }
         }
+    }
+
+    public static boolean onScreen(GameObject obj) {
+        return obj.x >= 0 && obj.y - obj.height <= MyGame.SCREEN_HEIGHT
+                && obj.y >= 0 && obj.x - obj.width <= MyGame.SCREEN_WIDTH;
     }
 }
