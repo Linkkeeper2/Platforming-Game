@@ -15,6 +15,7 @@ import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
 import main.java.object.entity.Player;
+import main.java.object.interact.JumpBooster;
 import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
 import main.java.screen.gui.Button;
@@ -71,6 +72,10 @@ public class EditorScreen extends Screen {
 
         objects.add(new Button(1450, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Moving Block",
                 new SwapObject("Moving Block")));
+
+        objects.add(
+                new Button(1610, MyGame.SCREEN_HEIGHT - 100, 150, 75, Color.GRAY, "JumpBooster",
+                        "./gfx/Editor/JumpBooster.png", new SwapObject("JumpBooster")));
 
         selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
 
@@ -242,6 +247,11 @@ public class EditorScreen extends Screen {
                 case "Moving Block":
                     objects.add(new MovingPlatform(x - (x % 64), y - (y % 64), 5));
                     setTile(row, col, 8);
+                    break;
+
+                case "JumpBooster":
+                    objects.add(new JumpBooster(x - (x % 64), y - y % 64));
+                    setTile(row, col, 9);
                     break;
             }
 

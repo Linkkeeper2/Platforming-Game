@@ -10,7 +10,6 @@ import main.java.screen.Screen;
 
 public abstract class Collidable extends GameObject {
     public static ArrayList<Collidable> collidables = new ArrayList<>();
-    protected Hitbox hitbox;
     /**
      * Enabled sides of the hitboxes on the collidable.
      * 0: Left

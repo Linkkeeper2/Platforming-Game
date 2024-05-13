@@ -17,6 +17,7 @@ import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
 import main.java.object.entity.Player;
+import main.java.object.interact.JumpBooster;
 import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
 
@@ -125,6 +126,10 @@ public class RoomScreen extends GameScreen {
 
                     case "8":
                         objects.add(new MovingPlatform(k * 64, i * 64, 5));
+                        break;
+
+                    case "9":
+                        objects.add(new JumpBooster(k * 64, i * 64));
                         break;
                 }
 

@@ -11,6 +11,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.java.object.meta.Hitbox;
+
 public abstract class GameObject {
     public int x, y;
     public int originX, originY;
@@ -19,6 +21,7 @@ public abstract class GameObject {
     protected Color normalColor;
     public int direction;
     protected BufferedImage sprite;
+    protected Hitbox hitbox;
 
     public GameObject(int x, int y, int width, int height, Color color) {
         this.x = x;
@@ -29,17 +32,23 @@ public abstract class GameObject {
         this.height = height;
         this.color = color;
         this.normalColor = color;
+
+        if (!(this instanceof Hitbox))
+            this.hitbox = new Hitbox(x, y, width, height, color);
     }
 
     public void draw(Graphics pen) {
-        if (this.sprite != null) {
+        if (this.sprite != null)
             pen.drawImage(sprite, x, y, null);
-        }
 
         else if (this.color != null) {
             pen.setColor(this.color);
             pen.fillRect(x, y, width, height);
+
         }
+
+        if (this.hitbox != null)
+            hitbox.draw(pen);
     }
 
     public void update() {
@@ -59,7 +68,7 @@ public abstract class GameObject {
     }
 
     public boolean isColliding(Rectangle other) {
-        return other.intersects(new Rectangle(x, y, width, height));
+        return other.intersects(getRect());
     }
 
     protected Color getDarkColor(int reduction) {
