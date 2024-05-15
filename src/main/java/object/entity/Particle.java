@@ -30,5 +30,6 @@ public class Particle extends GameObject {
         y -= yVel;
 
         yVel -= 1;
+        hitbox.updateRect(x, y, width, height);
     }
 }

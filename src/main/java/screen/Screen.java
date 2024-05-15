@@ -290,7 +290,7 @@ public abstract class Screen {
     }
 
     public static boolean onScreen(GameObject obj) {
-        return obj.x >= 0 && obj.y - obj.height <= MyGame.SCREEN_HEIGHT
-                && obj.y >= 0 && obj.x - obj.width <= MyGame.SCREEN_WIDTH;
+        return obj.x >= -obj.width && obj.y - obj.height <= MyGame.SCREEN_HEIGHT
+                && obj.y >= -obj.height && obj.x - obj.width <= MyGame.SCREEN_WIDTH;
     }
 }

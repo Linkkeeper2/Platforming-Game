@@ -42,6 +42,8 @@ public class Player extends EntityBody {
         sprites = SpriteSheetManager.getSheet("Player");
         sprite = sprites.getSprite(0);
         name = Account.name;
+        xVel = 10;
+        baseXVel = 10;
     }
 
     public Player(int x, int y, String name) {
@@ -69,7 +71,8 @@ public class Player extends EntityBody {
 
     private void controls() {
         if (controls[0] || controls[2]) {
-            x += xVel * direction;
+            x += ((xVel * 65) / MyGame.fps.getFPS()) * direction;
+
             hitbox.updateRect(x, y, width, height);
 
             if (direction == 1)
