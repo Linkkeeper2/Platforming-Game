@@ -44,7 +44,17 @@ public class Clock extends GameObject {
         String mil = milliseconds + "";
         mil = mil.substring(0, mil.length() - 1);
 
-        pen.drawString(hours + ":" + minutes + ":" + seconds + "." + mil, x, y);
+        String sec = "0" + seconds;
+
+        if (sec.length() > 2)
+            sec = sec.substring(1, sec.length());
+
+        String min = "0" + minutes;
+
+        if (min.length() > 2)
+            min = min.substring(1, min.length());
+
+        pen.drawString(hours + ":" + min + ":" + sec + "." + mil, x, y);
     }
 
     public boolean isRunning() {
