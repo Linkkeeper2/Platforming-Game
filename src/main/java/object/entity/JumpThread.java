@@ -13,7 +13,7 @@ public class JumpThread extends Thread {
     public void run() {
         double jumpheight = 15.5;
 
-        while (entity.jumping && jumpheight > 0) {
+        while (entity.jumping && jumpheight > 0 && entity.alive) {
             try {
                 sleep(10);
             } catch (InterruptedException e) {

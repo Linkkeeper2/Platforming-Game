@@ -11,7 +11,7 @@ public class ExternalJumpThread extends JumpThread {
     public void run() {
         double jumpheight = 15.5;
 
-        while (jumpheight > 0) {
+        while (jumpheight > 0 && entity.alive) {
             try {
                 sleep(10);
             } catch (InterruptedException e) {
