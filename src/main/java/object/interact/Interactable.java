@@ -1,7 +1,6 @@
 package main.java.object.interact;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 
 import main.java.object.GameObject;
 import main.java.object.entity.Player;
@@ -19,12 +18,11 @@ public abstract class Interactable extends GameObject {
     public void update() {
         if (Player.main != null && !isColliding(Player.main))
             canActivate = true;
-    }
 
-    public void keyPressed(KeyEvent ke) {
-        if (ke.getKeyCode() == 40 && isColliding(Player.main) && canActivate) {
+        if (canActivate && Player.main != null && isColliding(Player.main)) {
             if (behavior != null)
                 behavior.start();
+
             canActivate = false;
         }
     }

@@ -32,6 +32,11 @@ public abstract class GameScreen extends Screen {
                 else
                     Screen.subscreen = null;
                 break;
+
+            case 82: // R
+                Player.main.kill();
+                Screen.subscreen = null;
+                break;
         }
     }
 }
