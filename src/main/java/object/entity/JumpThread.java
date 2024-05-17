@@ -1,6 +1,5 @@
 package main.java.object.entity;
 
-import main.java.MyGame;
 import main.java.screen.Screen;
 
 public class JumpThread extends Thread {
@@ -11,7 +10,7 @@ public class JumpThread extends Thread {
     }
 
     public void run() {
-        double jumpheight = 15.5;
+        double jumpheight = 20;
 
         while (entity.jumping && jumpheight > 0 && entity.alive) {
             try {
@@ -20,7 +19,7 @@ public class JumpThread extends Thread {
             }
 
             if (!Screen.subOn()) {
-                entity.y -= (int) jumpheight * 100 / MyGame.fps.getFPS() * entity.gravity;
+                entity.y -= (int) jumpheight * entity.gravity;
                 jumpheight -= 0.5;
             }
         }
