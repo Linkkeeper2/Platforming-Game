@@ -149,6 +149,10 @@ public abstract class EntityBody extends GameObject {
         return gravity;
     }
 
+    public void flipGravity() {
+        gravity = (byte) -gravity;
+    }
+
     public void keyPressed(KeyEvent ke) {
         if (ability != null)
             ability.keyPressed(ke);

@@ -74,7 +74,7 @@ public class EditorScreen extends Screen {
                 new SwapObject("Moving Block")));
 
         objects.add(
-                new Button(1610, MyGame.SCREEN_HEIGHT - 100, 150, 75, Color.GRAY, "JumpBooster",
+                new Button(1610, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "JumpBooster",
                         "./gfx/Editor/JumpBooster.png", new SwapObject("JumpBooster")));
 
         selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
