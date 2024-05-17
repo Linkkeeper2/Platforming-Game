@@ -17,6 +17,7 @@ import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
 import main.java.object.entity.Player;
+import main.java.object.interact.GravityTile;
 import main.java.object.interact.JumpBooster;
 import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
@@ -69,8 +70,15 @@ public class RoomScreen extends GameScreen {
 
     public static void loadRoom(int level) {
         if (!renderLevel(level)) {
+            start = new StartTile(0, 384);
+            objects.add(start);
+            objects.add(new GravityTile(256, 384));
+
             for (int i = 0; i < MyGame.SCREEN_WIDTH / 64; i++)
                 objects.add(new Platform(i * 64, 512, 64, 64, Color.GRAY, BlockType.SOLID));
+
+            for (int i = 0; i < MyGame.SCREEN_WIDTH / 64; i++)
+                objects.add(new Platform(i * 64, 256, 64, 64, Color.GRAY, BlockType.SOLID));
         }
     }
 
