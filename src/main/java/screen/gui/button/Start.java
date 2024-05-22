@@ -18,8 +18,10 @@ public class Start implements ButtonAction {
 
         try {
             SoundManager.playSound("./sfx/Music/Beginnings.wav", -1);
-        } catch (NullPointerException | UnsupportedAudioFileException | IOException e) {
-            MyGame.status.addMessage("Could not loud music.", 5000);
+        } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {
+            MyGame.status.addMessage("Could not load music.");
+            SoundManager.setVolume(0);
+            MyGame.status.addMessage("Game volume has been set to 0.");
         }
 
         new ServerUpdates().start();
