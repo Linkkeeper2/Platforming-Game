@@ -7,6 +7,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import linkk.manager.SoundManager;
 import main.java.MyGame;
 import main.java.screen.RoomScreen;
+import main.java.screen.Screen;
 import main.java.server.Account;
 import main.java.server.ServerUpdates;
 
@@ -19,9 +20,7 @@ public class Start implements ButtonAction {
         try {
             SoundManager.playSound("./sfx/Music/Beginnings.wav", -1);
         } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {
-            MyGame.status.addMessage("Could not load music.");
-            SoundManager.setVolume(0);
-            MyGame.status.addMessage("Game volume has been set to 0.");
+            Screen.soundError();
         }
 
         new ServerUpdates().start();

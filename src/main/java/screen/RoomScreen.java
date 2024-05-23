@@ -4,10 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.bson.Document;
 
+import linkk.manager.SoundManager;
 import linkk.util.StringUtil;
 import main.java.MyGame;
 import main.java.object.GameObject;
@@ -30,10 +34,25 @@ public class RoomScreen extends GameScreen {
 
     public RoomScreen(int level) {
         this.level = level;
+        initMusic();
         Player.main.setLevel(level);
         Player.addPlayers();
         roomName = "Base Room";
         loadRoom(level);
+    }
+
+    private void initMusic() {
+        switch (level) {
+            case 25:
+                SoundManager.stopAllSounds();
+                try {
+                    SoundManager.playSound("./sfx/Music/Rookie.wav", -1);
+                } catch (NullPointerException | UnsupportedAudioFileException | IOException
+                        | IllegalArgumentException e) {
+                    Screen.soundError();
+                }
+                break;
+        }
     }
 
     @SuppressWarnings("static-access")

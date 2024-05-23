@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import linkk.manager.SoundManager;
 import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.object.block.Collidable;
@@ -38,6 +39,12 @@ public abstract class Screen {
 
     public static boolean subOn() {
         return subscreen != null;
+    }
+
+    public static void soundError() {
+        MyGame.status.addMessage("Could not load sound.");
+        SoundManager.setVolume(0);
+        MyGame.status.addMessage("Game volume has been set to 0.");
     }
 
     public void draw(Graphics pen) {
