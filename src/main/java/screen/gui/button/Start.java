@@ -17,6 +17,8 @@ public class Start implements ButtonAction {
         MyGame.screen = new RoomScreen(0);
         MyGame.database.addPlayer(Account.name);
 
+        SoundManager.stopAllSounds();
+
         try {
             SoundManager.playSound("./sfx/Music/Beginnings.wav", -1);
         } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {

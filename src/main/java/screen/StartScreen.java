@@ -1,7 +1,11 @@
 package main.java.screen;
 
 import java.awt.Color;
+import java.io.IOException;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import linkk.manager.SoundManager;
 import main.java.MyGame;
 import main.java.object.entity.Player;
 import main.java.screen.gui.Button;
@@ -21,5 +25,13 @@ public class StartScreen extends Screen {
             MyGame.database.removePlayer(Account.name);
 
         GameScreen.clock = null;
+
+        SoundManager.stopAllSounds();
+
+        try {
+            SoundManager.playSound("./sfx/Music/Welcome.wav", -1);
+        } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {
+            Screen.soundError();
+        }
     }
 }

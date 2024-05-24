@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import linkk.manager.SoundManager;
 import main.java.MyGame;
 import main.java.object.GameObject;
 import main.java.object.GhostObject;
@@ -84,6 +85,7 @@ public class EditorScreen extends Screen {
         rotatables.add("Spike");
 
         genBaseMap();
+        SoundManager.stopAllSounds();
     }
 
     public void draw(Graphics pen) {

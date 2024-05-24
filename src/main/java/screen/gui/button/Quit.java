@@ -9,9 +9,9 @@ import main.java.screen.StartScreen;
 public class Quit implements ButtonAction {
     public void action() {
         if (MyGame.screen instanceof GameScreen) {
+            SoundManager.stopAllSounds();
             MyGame.screen = new StartScreen();
             Screen.subscreen = null;
-            SoundManager.stopAllSounds();
         } else
             System.exit(0);
     }
