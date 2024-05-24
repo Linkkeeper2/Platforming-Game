@@ -52,6 +52,16 @@ public class RoomScreen extends GameScreen {
                     Screen.soundError();
                 }
                 break;
+
+            case 50:
+                SoundManager.stopAllSounds();
+                try {
+                    SoundManager.playSound("./sfx/Music/Tense.wav", -1);
+                } catch (NullPointerException | UnsupportedAudioFileException | IOException
+                        | IllegalArgumentException e) {
+                    Screen.soundError();
+                }
+                break;
         }
     }
 
