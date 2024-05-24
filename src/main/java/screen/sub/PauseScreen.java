@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import linkk.manager.SoundManager;
 import linkk.util.StringUtil;
 import main.java.MyGame;
 import main.java.screen.gui.Button;
@@ -18,6 +19,7 @@ public class PauseScreen extends SubScreen {
         objects.add(new Button(MyGame.SCREEN_WIDTH / 2 - 75, 200, 150, 50, Color.GRAY, "Resume", new Resume()));
         objects.add(new Button(MyGame.SCREEN_WIDTH / 2 - 75, 275, 150, 50, Color.GRAY, "Restart", new Restart()));
         objects.add(new Button(MyGame.SCREEN_WIDTH / 2 - 75, 350, 150, 50, Color.GRAY, "Quit", new Quit()));
+        SoundManager.pauseAllSounds();
     }
 
     public void draw(Graphics pen) {
