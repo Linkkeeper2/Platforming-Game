@@ -48,8 +48,6 @@ public abstract class Screen {
     }
 
     public void draw(Graphics pen) {
-        MyGame.status.draw(pen);
-
         for (int i = 0; i < objects.size(); i++) {
             GameObject obj = objects.get(i);
 
@@ -61,6 +59,7 @@ public abstract class Screen {
             subscreen.draw(pen);
 
         MyGame.fps.draw(pen);
+        MyGame.status.draw(pen);
     }
 
     public void update() {
