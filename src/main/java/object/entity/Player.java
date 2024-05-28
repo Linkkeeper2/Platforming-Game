@@ -24,6 +24,7 @@ public class Player extends EntityBody {
     protected String name;
     public static ArrayList<Player> players = new ArrayList<>();
     protected int currLevel;
+    private double runCounter; // Animates the sprite for movement
 
     public Player(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -64,6 +65,8 @@ public class Player extends EntityBody {
 
     public void update() {
         y += yVel * gravity;
+        runCounter += 0.1;
+        runCounter %= 2;
 
         controls();
         super.update();
@@ -75,10 +78,19 @@ public class Player extends EntityBody {
 
             hitbox.updateRect(x, y, width, height);
 
-            if (direction == 1)
-                sprite = sprites.getSprite(1);
-            else if (direction == -1)
-                sprite = sprites.getSprite(2);
+            if (direction == 1) {
+                if (runCounter < 1)
+                    sprite = sprites.getSprite(1);
+                else
+                    sprite = sprites.getSprite(4);
+            }
+
+            else if (direction == -1) {
+                if (runCounter < 1)
+                    sprite = sprites.getSprite(2);
+                else
+                    sprite = sprites.getSprite(5);
+            }
         }
 
         else {
