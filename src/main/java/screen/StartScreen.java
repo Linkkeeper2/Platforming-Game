@@ -33,5 +33,8 @@ public class StartScreen extends Screen {
         } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {
             Screen.soundError();
         }
+
+        if (MyGame.frame != null)
+            MyGame.frame.setBackground(new Color(170, 170, 170));
     }
 }

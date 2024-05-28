@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public abstract class Game implements KeyListener, MouseListener, MouseMotionListener {
-    private JFrame frame;
+    public static JFrame frame;
     private GamePanel gamePanel;
     boolean running;
     private MyGame game;

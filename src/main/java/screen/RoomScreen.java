@@ -35,6 +35,7 @@ public class RoomScreen extends GameScreen {
     public RoomScreen(int level) {
         this.level = level;
         initMusic();
+        initPalette();
         Player.main.setLevel(level);
         Player.addPlayers();
         roomName = "Base Room";
@@ -63,6 +64,17 @@ public class RoomScreen extends GameScreen {
                 }
                 break;
         }
+    }
+
+    private void initPalette() {
+        if (level >= 0 && level < 25)
+            MyGame.frame.setBackground(new Color(170, 170, 170));
+
+        else if (level >= 25 && level < 50)
+            MyGame.frame.setBackground(new Color(44, 48, 120));
+
+        else if (level >= 50 && level < 75)
+            MyGame.frame.setBackground(new Color(8, 11, 77));
     }
 
     @SuppressWarnings("static-access")
