@@ -60,6 +60,11 @@ public abstract class EntityBody extends GameObject {
 
         else if (x > MyGame.SCREEN_WIDTH - width - 16)
             x = MyGame.SCREEN_WIDTH - width - 16;
+
+        if (y < 0) {
+            y = 0;
+            jumping = false;
+        }
     }
 
     private void collisions() {

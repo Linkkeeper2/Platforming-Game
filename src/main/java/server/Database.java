@@ -11,6 +11,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
 
 import main.java.object.entity.GhostPlayer;
@@ -158,12 +159,15 @@ public class Database {
 
         int levelNum = collection.find().into(levels).size();
 
-        Document doc = new Document()
-                .append("name", name)
-                .append("number", levelNum)
-                .append("data", Arrays.asList(levelLayout));
+        UpdateOptions options = new UpdateOptions().upsert(true);
 
-        collection.insertOne(doc);
+        Document query = new Document().append("name", name);
+
+        Bson updates = Updates.combine(Updates.set("name", name),
+                Updates.set("number", levelNum),
+                Updates.set("data", Arrays.asList(levelLayout)));
+
+        collection.updateOne(query, updates, options);
         refreshLevels();
     }
 
