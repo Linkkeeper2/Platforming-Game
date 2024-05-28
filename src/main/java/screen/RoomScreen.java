@@ -93,8 +93,13 @@ public class RoomScreen extends GameScreen {
         if (ke.getKeyCode() == 61) // PLUS/EQUALS
             MyGame.screen = new RoomScreen(level + 1);
 
-        else if (ke.getKeyCode() == 45) // HYPHEN/UNDERSCORE
-            MyGame.screen = new RoomScreen(level - 1);
+        else if (ke.getKeyCode() == 45) { // HYPHEN/UNDERSCORE
+            if (level > 0)
+                MyGame.screen = new RoomScreen(level - 1);
+
+            else
+                MyGame.screen = new RoomScreen(MyGame.database.levels.size() - 1);
+        }
     }
 
     public static void loadRoom(int level) {

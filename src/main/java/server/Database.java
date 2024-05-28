@@ -22,7 +22,7 @@ public class Database {
     private MongoClient client;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
-    private ArrayList<Document> levels;
+    public ArrayList<Document> levels;
 
     public Database() {
         try {
@@ -163,9 +163,18 @@ public class Database {
 
         Document query = new Document().append("name", name);
 
-        Bson updates = Updates.combine(Updates.set("name", name),
-                Updates.set("number", levelNum),
-                Updates.set("data", Arrays.asList(levelLayout)));
+        Document doc = collection.find(query).first();
+
+        Bson updates;
+
+        if (doc != null)
+            updates = Updates.combine(Updates.set("name", name),
+                    Updates.set("data", Arrays.asList(levelLayout)));
+
+        else
+            updates = Updates.combine(Updates.set("name", name),
+                    Updates.set("number", levelNum),
+                    Updates.set("data", Arrays.asList(levelLayout)));
 
         collection.updateOne(query, updates, options);
         refreshLevels();
