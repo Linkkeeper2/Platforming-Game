@@ -1,6 +1,7 @@
 package main.java.object.entity;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -60,7 +61,17 @@ public class Player extends EntityBody {
     public void draw(Graphics pen) {
         super.draw(pen);
         pen.setColor(Color.BLACK);
-        pen.drawString(name, x + width / 2 - StringUtil.getWidth(pen, name) / 2, y - 24);
+        pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 24));
+
+        int y = this.y;
+
+        if (gravity == 1)
+            y -= 24;
+
+        else
+            y += 24 + height;
+
+        pen.drawString(name, x + width / 2 - StringUtil.getWidth(pen, name) / 2, y);
     }
 
     public void update() {

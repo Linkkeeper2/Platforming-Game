@@ -2,6 +2,7 @@ package main.java.object.entity;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -23,6 +24,7 @@ public class GhostPlayer extends Player {
 
             g.drawImage(sprite, x, y, null);
             g.setColor(Color.BLACK);
+            pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 24));
             g.drawString(name, x + width / 2 - StringUtil.getWidth(g, name) / 2, y - 24);
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
