@@ -34,7 +34,10 @@ public class RoomScreen extends GameScreen {
 
     public RoomScreen(int level) {
         this.level = level;
-        initMusic();
+
+        if (level % 25 == 0)
+            initMusic();
+
         initPalette();
         Player.main.setLevel(level);
         Player.addPlayers();
@@ -43,26 +46,34 @@ public class RoomScreen extends GameScreen {
     }
 
     private void initMusic() {
-        switch (level) {
-            case 25:
-                SoundManager.stopAllSounds();
-                try {
-                    SoundManager.playSound("./sfx/Music/Rookie.wav", -1);
-                } catch (NullPointerException | UnsupportedAudioFileException | IOException
-                        | IllegalArgumentException e) {
-                    Screen.soundError();
-                }
-                break;
+        if (level >= 0 && level < 25) {
+            SoundManager.stopAllSounds();
+            try {
+                SoundManager.playSound("./sfx/Music/Beginnings.wav", -1);
+            } catch (NullPointerException | UnsupportedAudioFileException | IOException
+                    | IllegalArgumentException e) {
+                Screen.soundError();
+            }
+        }
 
-            case 50:
-                SoundManager.stopAllSounds();
-                try {
-                    SoundManager.playSound("./sfx/Music/Tense.wav", -1);
-                } catch (NullPointerException | UnsupportedAudioFileException | IOException
-                        | IllegalArgumentException e) {
-                    Screen.soundError();
-                }
-                break;
+        else if (level >= 25 && level < 50) {
+            SoundManager.stopAllSounds();
+            try {
+                SoundManager.playSound("./sfx/Music/Rookie.wav", -1);
+            } catch (NullPointerException | UnsupportedAudioFileException | IOException
+                    | IllegalArgumentException e) {
+                Screen.soundError();
+            }
+        }
+
+        else if (level >= 50 && level < 75) {
+            SoundManager.stopAllSounds();
+            try {
+                SoundManager.playSound("./sfx/Music/Tense.wav", -1);
+            } catch (NullPointerException | UnsupportedAudioFileException | IOException
+                    | IllegalArgumentException e) {
+                Screen.soundError();
+            }
         }
     }
 
@@ -109,8 +120,11 @@ public class RoomScreen extends GameScreen {
             if (level > 0)
                 MyGame.screen = new RoomScreen(level - 1);
 
-            else
+            else {
                 MyGame.screen = new RoomScreen(MyGame.database.levels.size() - 1);
+                level = MyGame.database.levels.size() - 1;
+                initMusic();
+            }
         }
     }
 
