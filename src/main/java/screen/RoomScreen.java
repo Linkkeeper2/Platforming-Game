@@ -97,7 +97,7 @@ public class RoomScreen extends GameScreen {
             if (this.end != null) {
                 if (Player.main.getRect().intersects(end.getRect())) {
                     MyGame.screen = new RoomScreen(level + 1);
-                    Account.level++;
+                    Account.level = level + 1;
                     MyGame.database.updateUserLevel();
                 }
             }

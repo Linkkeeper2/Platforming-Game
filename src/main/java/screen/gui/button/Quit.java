@@ -10,6 +10,7 @@ public class Quit implements ButtonAction {
     public void action() {
         if (MyGame.screen instanceof GameScreen) {
             SoundManager.stopAllSounds();
+            MyGame.database.updateUserLevel();
             MyGame.screen = new StartScreen();
             Screen.subscreen = null;
         } else
