@@ -25,6 +25,7 @@ import main.java.object.interact.GravityTile;
 import main.java.object.interact.JumpBooster;
 import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
+import main.java.server.Account;
 
 public class RoomScreen extends GameScreen {
     private static String roomName;
@@ -94,8 +95,11 @@ public class RoomScreen extends GameScreen {
 
         if (Player.main != null) {
             if (this.end != null) {
-                if (Player.main.getRect().intersects(end.getRect()))
+                if (Player.main.getRect().intersects(end.getRect())) {
                     MyGame.screen = new RoomScreen(level + 1);
+                    Account.level++;
+                    MyGame.database.updateUserLevel();
+                }
             }
         }
     }

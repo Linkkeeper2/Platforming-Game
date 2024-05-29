@@ -4,24 +4,15 @@ import main.java.MyGame;
 import main.java.screen.EditorScreen;
 import main.java.screen.RoomScreen;
 import main.java.screen.Screen;
-import main.java.screen.gui.TextBox;
 
-public class LoadThread extends Thread {
+public class LoadThread extends TextThread {
     private int level;
-    private TextBox box;
 
     public LoadThread(TextBox box) {
-        this.box = box;
+        super(box);
     }
 
-    public void run() {
-        while (!box.isSubmitted() && MyGame.screen instanceof EditorScreen && Screen.contains(box)) {
-            System.out.print("");
-        }
-
-        if (!(MyGame.screen instanceof EditorScreen) || !Screen.contains(box))
-            return;
-
+    protected void action() {
         try {
             MyGame.screen = new EditorScreen();
 
@@ -30,8 +21,6 @@ public class LoadThread extends Thread {
             RoomScreen.loadRoom(level);
 
             MyGame.status.addMessage("Map, " + RoomScreen.getRoomName() + ", loaded successfully!", 5000);
-
-            Screen.remove(box);
         } catch (NumberFormatException e) {
             MyGame.status.addMessage("Could not load map.", 5000);
             Screen.remove(box);

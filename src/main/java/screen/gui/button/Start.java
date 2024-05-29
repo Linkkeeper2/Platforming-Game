@@ -14,7 +14,7 @@ import main.java.server.ServerUpdates;
 public class Start implements ButtonAction {
     public void action() {
         MyGame.database.refreshLevels();
-        MyGame.screen = new RoomScreen(0);
+        MyGame.screen = new RoomScreen(Account.level);
         MyGame.database.addPlayer(Account.name);
 
         SoundManager.stopAllSounds();

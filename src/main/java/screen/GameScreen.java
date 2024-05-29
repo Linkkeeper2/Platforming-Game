@@ -20,6 +20,8 @@ public abstract class GameScreen extends Screen {
         } else {
             Screen.add(clock);
         }
+
+        StartScreen.playMusic = true;
     }
 
     public void keyPressed(KeyEvent ke) {

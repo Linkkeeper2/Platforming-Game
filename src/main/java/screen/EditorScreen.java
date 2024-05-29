@@ -22,12 +22,12 @@ import main.java.object.meta.StartTile;
 import main.java.screen.gui.Button;
 import main.java.screen.gui.Grid;
 import main.java.screen.gui.Overlay;
-import main.java.screen.gui.TextBox;
 import main.java.screen.gui.button.BackToMenu;
 import main.java.screen.gui.button.ButtonAction;
 import main.java.screen.gui.button.LoadMap;
 import main.java.screen.gui.button.ResetEditor;
 import main.java.screen.gui.text.SaveThread;
+import main.java.screen.gui.text.TextBox;
 
 public class EditorScreen extends Screen {
     private String object;
@@ -326,7 +326,6 @@ public class EditorScreen extends Screen {
 
             if (box == null) {
                 box = new TextBox(8, MyGame.SCREEN_HEIGHT - 160, 250, "Level Name:");
-                objects.add(box);
                 new SaveThread(box, level).start();
             } else {
                 Screen.remove(box);

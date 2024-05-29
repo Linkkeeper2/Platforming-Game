@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.Binary;
 
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -14,6 +16,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
 
+import main.java.MyGame;
 import main.java.object.entity.GhostPlayer;
 import main.java.object.entity.Player;
 import main.java.screen.Screen;
@@ -298,5 +301,82 @@ public class Database {
         Document query = new Document().append("name", Player.main.getName());
 
         collection.updateOne(query, updates);
+    }
+
+    public void registerAccount(String name, String password) {
+        collection = database.getCollection("Accounts");
+
+        Document query = new Document().append("username", name.getBytes());
+
+        if (collection.find(query).first() != null) {
+            MyGame.status.addMessage("Account with username '" + name + "' already exists.", 5000);
+            return;
+        }
+
+        Document user = new Document()
+                .append("username", name.getBytes())
+                .append("password", password.getBytes())
+                .append("level", 0);
+
+        try {
+            collection.insertOne(user);
+            Account.name = name;
+            Account.level = 0;
+            MyGame.status.addMessage("Account created successfully!");
+        } catch (MongoException e) {
+            MyGame.status.addMessage("Account cannot be created at this time.", 5000);
+        }
+    }
+
+    public void login(String name, String password) {
+        collection = database.getCollection("Accounts");
+
+        Document query = new Document()
+                .append("username", name.getBytes())
+                .append("password", password.getBytes());
+
+        try {
+            Document user = collection.find(query).first();
+
+            if (user == null) {
+                MyGame.status.addMessage("Incorrect password.", 5000);
+                return;
+            }
+
+            Binary binary = (Binary) user.get("username");
+            String username = new String(binary.getData());
+
+            Account.name = username;
+            Account.level = user.getInteger("level");
+            MyGame.status.addMessage("Logged in Successfully!");
+        } catch (MongoException e) {
+            MyGame.status.addMessage("Could not log in at this time.", 5000);
+        }
+    }
+
+    public void updateUserLevel() {
+        collection = database.getCollection("Accounts");
+
+        Document query = new Document()
+                .append("username", Account.name.getBytes());
+
+        Document user = collection.find(query).first();
+
+        if (user != null) {
+            Bson updates = Updates.combine(Updates.set("level", Account.level));
+
+            collection.updateOne(query, updates);
+        }
+    }
+
+    public boolean userExists(String name) {
+        collection = database.getCollection("Accounts");
+
+        Document query = new Document().append("username", name.getBytes());
+
+        if (collection.find(query).first() == null)
+            return false;
+
+        return true;
     }
 }

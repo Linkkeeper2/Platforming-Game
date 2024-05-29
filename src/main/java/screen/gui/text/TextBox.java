@@ -1,4 +1,4 @@
-package main.java.screen.gui;
+package main.java.screen.gui.text;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import main.java.object.GameObject;
 
 public class TextBox extends GameObject {
-    private String title;
-    private String contents;
+    protected String title;
+    protected String contents;
     private boolean submitted;
 
     public TextBox(int x, int y, int width, String title) {
@@ -40,6 +40,10 @@ public class TextBox extends GameObject {
         else
             width = 250;
 
+        drawTyped(pen);
+    }
+
+    protected void drawTyped(Graphics pen) {
         pen.setColor(Color.BLACK);
         pen.drawString(title, x, y);
         pen.setColor(Color.WHITE);
