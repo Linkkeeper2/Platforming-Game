@@ -85,7 +85,7 @@ public class Player extends EntityBody {
 
     private void controls() {
         if (controls[0] || controls[2]) {
-            x += xVel * direction;
+            x += (xVel * 65) / MyGame.fps.getFPS() * direction;
 
             hitbox.updateRect(x, y, width, height);
 
