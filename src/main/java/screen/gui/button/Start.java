@@ -14,15 +14,21 @@ import main.java.server.ServerUpdates;
 public class Start implements ButtonAction {
     public void action() {
         MyGame.database.refreshLevels();
-        MyGame.screen = new RoomScreen(Account.level);
+        RoomScreen screen = new RoomScreen(Account.level);
+        MyGame.screen = screen;
         MyGame.database.addPlayer(Account.name);
 
-        SoundManager.stopAllSounds();
+        if (Account.level > 0)
+            screen.initMusic();
 
-        try {
-            SoundManager.playSound("./sfx/Music/Beginnings.wav", -1);
-        } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {
-            Screen.soundError();
+        else {
+            SoundManager.stopAllSounds();
+
+            try {
+                SoundManager.playSound("./sfx/Music/Beginnings.wav", -1);
+            } catch (NullPointerException | UnsupportedAudioFileException | IOException | IllegalArgumentException e) {
+                Screen.soundError();
+            }
         }
 
         new ServerUpdates().start();

@@ -46,7 +46,7 @@ public class RoomScreen extends GameScreen {
         loadRoom(level);
     }
 
-    private void initMusic() {
+    public void initMusic() {
         if (level >= 0 && level < 25) {
             SoundManager.stopAllSounds();
             try {
