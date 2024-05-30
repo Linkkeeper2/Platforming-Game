@@ -46,6 +46,7 @@ public class Player extends EntityBody {
         name = Account.name;
         xVel = 10;
         baseXVel = 10;
+        new MovementThread(this).start();
     }
 
     public Player(int x, int y, String name) {
@@ -79,13 +80,12 @@ public class Player extends EntityBody {
         runCounter += 0.1;
         runCounter %= 2;
 
-        controls();
         super.update();
     }
 
-    private void controls() {
+    public void controls() {
         if (controls[0] || controls[2]) {
-            x += (xVel * 65) / MyGame.fps.getFPS() * direction;
+            x += xVel * direction;
 
             hitbox.updateRect(x, y, width, height);
 

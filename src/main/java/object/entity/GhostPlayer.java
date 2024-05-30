@@ -39,8 +39,7 @@ public class GhostPlayer extends Player {
 
     }
 
-    @SuppressWarnings("unused")
-    private void controls() {
+    public void controls() {
 
     }
 
