@@ -116,11 +116,12 @@ public class EditorScreen extends Screen {
                 break;
 
             case 37: // LEFT
-                shiftButtons(-25);
+                if (Player.main == null)
+                    shiftButtons(-25);
                 break;
 
             case 39: // RIGHT
-                if (shift < 0)
+                if (shift < 0 && Player.main == null)
                     shiftButtons(25);
                 break;
         }
