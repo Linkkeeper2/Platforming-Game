@@ -31,13 +31,14 @@ import main.java.screen.gui.text.TextBox;
 
 public class EditorScreen extends Screen {
     private String object;
-    private ArrayList<String> level;
+    private ArrayList<ArrayList<String>> level;
     private int x, y;
     public static StartTile start;
     public static EndTile end;
     private int rotation;
     private GhostObject selectedObject;
     private ArrayList<String> rotatables;
+    private int shift;
 
     public EditorScreen() {
         object = "Block";
@@ -113,7 +114,27 @@ public class EditorScreen extends Screen {
                     setGhost();
                 }
                 break;
+
+            case 37: // LEFT
+                shiftButtons(-25);
+                break;
+
+            case 39: // RIGHT
+                if (shift < 0)
+                    shiftButtons(25);
+                break;
         }
+    }
+
+    private void shiftButtons(int distance) {
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject obj = objects.get(i);
+
+            if (obj != null && obj instanceof Button)
+                obj.x += distance;
+        }
+
+        shift += distance;
     }
 
     public void mouseClicked(MouseEvent me) {
@@ -169,13 +190,11 @@ public class EditorScreen extends Screen {
         int rows = MyGame.SCREEN_HEIGHT / 64;
 
         for (int r = 0; r < rows; r++) {
-            String row = "";
+            level.add(new ArrayList<>());
+            ArrayList<String> row = level.get(r);
 
-            for (int c = 0; c < cols; c++) {
-                row += "0";
-            }
-
-            level.add(row);
+            for (int c = 0; c < cols; c++)
+                row.add("0");
         }
     }
 
@@ -194,19 +213,8 @@ public class EditorScreen extends Screen {
     }
 
     private void setTile(int row, int col, int type) {
-        String tileRow = level.get(row);
-        String newRow = "";
-
-        for (int i = 0; i < tileRow.length(); i++) {
-            if (i != col)
-                newRow += tileRow.substring(i, i + 1);
-
-            else
-                newRow += type;
-        }
-
-        level.set(row, newRow);
-        // System.out.println(map);
+        ArrayList<String> levelRow = level.get(row);
+        levelRow.set(col, type + "");
     }
 
     private void placeObject(int x, int y) {
@@ -313,7 +321,7 @@ public class EditorScreen extends Screen {
         selectedObject.y = y - (y % 64);
     }
 
-    public void setLevel(ArrayList<String> level) {
+    public void setLevel(ArrayList<ArrayList<String>> level) {
         this.level = level;
     }
 

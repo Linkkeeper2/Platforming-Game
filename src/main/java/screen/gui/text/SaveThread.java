@@ -7,9 +7,9 @@ import main.java.screen.EditorScreen;
 import main.java.screen.Screen;
 
 public class SaveThread extends TextThread {
-    private ArrayList<String> level;
+    private ArrayList<ArrayList<String>> level;
 
-    public SaveThread(TextBox box, ArrayList<String> level) {
+    public SaveThread(TextBox box, ArrayList<ArrayList<String>> level) {
         super(box);
         this.level = level;
     }

@@ -155,7 +155,7 @@ public class RoomScreen extends GameScreen {
         roomName = lvl.getString("name");
 
         @SuppressWarnings("unchecked")
-        ArrayList<String> data = (ArrayList<String>) lvl.get("data");
+        ArrayList<ArrayList<String>> data = (ArrayList<ArrayList<String>>) lvl.get("data");
 
         if (MyGame.screen instanceof EditorScreen) {
             EditorScreen e = (EditorScreen) MyGame.screen;
@@ -163,10 +163,10 @@ public class RoomScreen extends GameScreen {
         }
 
         for (int i = 0; i < data.size(); i++) {
-            String row = data.get(i);
+            ArrayList<String> row = data.get(i);
 
-            for (int k = 0; k < row.length(); k++) {
-                String tile = row.substring(k, k + 1);
+            for (int k = 0; k < row.size(); k++) {
+                String tile = row.get(k);
 
                 switch (tile) {
                     case "1":

@@ -2,7 +2,6 @@ package main.java.server;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -150,13 +149,8 @@ public class Database {
         }
     }
 
-    public void createLevel(String name, ArrayList<String> level) {
+    public void createLevel(String name, ArrayList<ArrayList<String>> level) {
         collection = database.getCollection("Levels");
-
-        String[] levelLayout = new String[level.size()];
-
-        for (int i = 0; i < level.size(); i++)
-            levelLayout[i] = level.get(i);
 
         ArrayList<Document> levels = new ArrayList<>();
 
@@ -172,12 +166,12 @@ public class Database {
 
         if (doc != null)
             updates = Updates.combine(Updates.set("name", name),
-                    Updates.set("data", Arrays.asList(levelLayout)));
+                    Updates.set("data", level));
 
         else
             updates = Updates.combine(Updates.set("name", name),
                     Updates.set("number", levelNum),
-                    Updates.set("data", Arrays.asList(levelLayout)));
+                    Updates.set("data", level));
 
         collection.updateOne(query, updates, options);
         refreshLevels();
