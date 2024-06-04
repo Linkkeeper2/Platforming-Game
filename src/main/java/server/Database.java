@@ -204,7 +204,8 @@ public class Database {
                 .append("x", 0)
                 .append("y", 0)
                 .append("direction", 0)
-                .append("level", 0);
+                .append("level", 0)
+                .append("gravity", 1);
 
         collection.insertOne(doc);
     }
@@ -271,6 +272,7 @@ public class Database {
                 player.y = doc.getInteger("y");
                 player.direction = doc.getInteger("direction");
                 player.setLevel(doc.getInteger("level"));
+                player.setGravity((byte) ((int) doc.getInteger("gravity")));
                 checks.set(i, true);
                 updatedIndex = i;
                 break;
@@ -290,7 +292,8 @@ public class Database {
                 Updates.set("x", Player.main.x),
                 Updates.set("y", Player.main.y),
                 Updates.set("direction", (int) Player.main.direction),
-                Updates.set("level", Player.main.getLevel()));
+                Updates.set("level", Player.main.getLevel()),
+                Updates.set("gravity", Player.main.getGravity()));
 
         Document query = new Document().append("name", Player.main.getName());
 

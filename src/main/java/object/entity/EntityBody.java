@@ -170,6 +170,10 @@ public abstract class EntityBody extends GameObject {
         gravity = (byte) -gravity;
     }
 
+    public void setGravity(byte gravity) {
+        this.gravity = gravity;
+    }
+
     public void keyPressed(KeyEvent ke) {
         if (ability != null)
             ability.keyPressed(ke);

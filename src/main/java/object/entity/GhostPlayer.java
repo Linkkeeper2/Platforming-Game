@@ -25,7 +25,16 @@ public class GhostPlayer extends Player {
             g.drawImage(sprite, x, y, null);
             g.setColor(Color.BLACK);
             pen.setFont(new Font("./gfx/Font/Peepo.ttf", 0, 24));
-            g.drawString(name, x + width / 2 - StringUtil.getWidth(g, name) / 2, y - 24);
+
+            int y = this.y;
+
+            if (gravity == 1)
+                y -= 24;
+
+            else
+                y += 24 + height;
+
+            g.drawString(name, x + width / 2 - StringUtil.getWidth(g, name) / 2, y);
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
 
