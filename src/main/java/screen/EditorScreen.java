@@ -62,12 +62,12 @@ public class EditorScreen extends Screen {
 
         objects.add(new Button(650, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Load Level", new LoadMap()));
 
-        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", "./gfx/Editor/Block.png",
-                new SwapObject("Block")));
-
-        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
-        objects.add(new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", "./gfx/Editor/Flag.png",
+        objects.add(new Button(810, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Start", new SwapObject("Start")));
+        objects.add(new Button(970, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "End", "./gfx/Editor/Flag.png",
                 new SwapObject("End")));
+
+        objects.add(new Button(1130, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Block", "./gfx/Editor/Block.png",
+                new SwapObject("Block")));
 
         objects.add(
                 new Button(1290, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Spike",
