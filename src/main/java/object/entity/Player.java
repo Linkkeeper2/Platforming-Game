@@ -44,7 +44,7 @@ public class Player extends EntityBody {
         sprites = SpriteSheetManager.getSheet("Player");
         sprite = sprites.getSprite(0);
         name = Account.name;
-        xVel = 10;
+        xVel = 0;
         baseXVel = 10;
         new MovementThread(this).start();
     }
@@ -85,6 +85,9 @@ public class Player extends EntityBody {
 
     public void controls() {
         if (controls[0] || controls[2]) {
+            if (xVel < baseXVel)
+                xVel += 1;
+
             x += xVel * direction;
 
             hitbox.updateRect(x, y, width, height);
@@ -107,6 +110,7 @@ public class Player extends EntityBody {
         else {
             Screen.globalControls[0] = controls[0];
             Screen.globalControls[1] = controls[2];
+            xVel = 0;
         }
 
         if (controls[1] && !jumping && canJump) {
