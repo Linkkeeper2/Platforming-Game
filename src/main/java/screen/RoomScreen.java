@@ -14,9 +14,7 @@ import org.bson.Document;
 import linkk.manager.SoundManager;
 import linkk.util.StringUtil;
 import main.java.MyGame;
-import main.java.object.GameObject;
 import main.java.object.block.BlockType;
-import main.java.object.block.Collidable;
 import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
@@ -214,17 +212,7 @@ public class RoomScreen extends GameScreen {
             }
         }
 
-        ArrayList<GameObject> objects = Screen.objects;
-
-        for (int i = 0; i < objects.size(); i++) {
-            GameObject obj = objects.get(i);
-
-            if (obj != null && obj instanceof Collidable) {
-                Collidable c = (Collidable) obj;
-
-                c.setEnabled();
-            }
-        }
+        Screen.updateAdjacent();
 
         return true;
     }
