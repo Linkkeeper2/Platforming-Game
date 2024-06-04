@@ -74,7 +74,7 @@ public class EditorScreen extends Screen {
                         "./gfx/Editor/Death/Spike.png", new SwapObject("Spike")));
 
         objects.add(new Button(1450, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Moving Block",
-                new SwapObject("Moving Block")));
+                "./gfx/Editor/MovingBlock.png", new SwapObject("MovingBlock")));
 
         objects.add(
                 new Button(1610, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Jump Booster",
@@ -205,11 +205,6 @@ public class EditorScreen extends Screen {
     }
 
     private void setGhost() {
-        if (object.equals("Moving Block")) {
-            selectedObject = new GhostObject(x, y, new Color(0, 255, 255, 64));
-            return;
-        }
-
         String path = "./gfx/Objects/" + object;
 
         if (rotation != 0 && rotatables.contains(object))
@@ -260,7 +255,7 @@ public class EditorScreen extends Screen {
                     setTile(row, col, 4 + rotation / 90);
                     break;
 
-                case "Moving Block":
+                case "MovingBlock":
                     objects.add(new MovingPlatform(x - (x % 64), y - (y % 64), 5));
                     setTile(row, col, 8);
                     break;
