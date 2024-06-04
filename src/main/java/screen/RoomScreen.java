@@ -203,6 +203,10 @@ public class RoomScreen extends GameScreen {
                     case "9":
                         objects.add(new JumpBooster(k * 64, i * 64));
                         break;
+
+                    case "10":
+                        objects.add(new GravityTile(k * 64, i * 64));
+                        break;
                 }
 
                 if (Integer.parseInt(tile) >= 4 && Integer.parseInt(tile) <= 7)

@@ -16,6 +16,7 @@ import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.block.Spike;
 import main.java.object.entity.Player;
+import main.java.object.interact.GravityTile;
 import main.java.object.interact.JumpBooster;
 import main.java.object.meta.EndTile;
 import main.java.object.meta.StartTile;
@@ -76,8 +77,12 @@ public class EditorScreen extends Screen {
                 new SwapObject("Moving Block")));
 
         objects.add(
-                new Button(1610, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "JumpBooster",
+                new Button(1610, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Jump Booster",
                         "./gfx/Editor/JumpBooster.png", new SwapObject("JumpBooster")));
+
+        objects.add(
+                new Button(1770, MyGame.SCREEN_HEIGHT - 100, 150, 50, Color.GRAY, "Gravity Tile",
+                        "./gfx/Editor/GravityTile.png", new SwapObject("GravityTile")));
 
         selectedObject = new GhostObject(x, y, new Color(100, 100, 100, 64));
 
@@ -263,6 +268,11 @@ public class EditorScreen extends Screen {
                 case "JumpBooster":
                     objects.add(new JumpBooster(x - (x % 64), y - y % 64));
                     setTile(row, col, 9);
+                    break;
+
+                case "GravityTile":
+                    objects.add(new GravityTile(x - (x % 64), y - y % 64));
+                    setTile(row, col, 10);
                     break;
             }
 

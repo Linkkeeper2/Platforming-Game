@@ -61,9 +61,16 @@ public abstract class EntityBody extends GameObject {
         else if (x > MyGame.SCREEN_WIDTH - width - 16)
             x = MyGame.SCREEN_WIDTH - width - 16;
 
-        if (y < 0) {
-            y = 0;
-            jumping = false;
+        if (gravity == 1) {
+            if (y < 0) {
+                y = 0;
+                jumping = false;
+            }
+        } else {
+            if (y > MyGame.SCREEN_HEIGHT - height) {
+                y = MyGame.SCREEN_HEIGHT - height;
+                jumping = false;
+            }
         }
     }
 
@@ -144,6 +151,7 @@ public abstract class EntityBody extends GameObject {
         jumping = false;
         canJump = false;
         alive = true;
+        gravity = 1;
     }
 
     public boolean isJumping() {
@@ -152,6 +160,10 @@ public abstract class EntityBody extends GameObject {
 
     public byte getGravity() {
         return gravity;
+    }
+
+    public void stopJumping() {
+        jumping = false;
     }
 
     public void flipGravity() {
