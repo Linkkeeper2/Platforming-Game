@@ -3,6 +3,7 @@ package main.java.screen;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 
 import linkk.manager.SoundManager;
@@ -227,6 +228,20 @@ public abstract class Screen {
 
                 if (obj != null)
                     obj.mouseMoved(me);
+            }
+        }
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent me) {
+        if (subscreen != null)
+            subscreen.mouseWheelMoved(me);
+
+        else {
+            for (int i = 0; i < objects.size(); i++) {
+                GameObject obj = objects.get(i);
+
+                if (obj != null)
+                    obj.mouseWheelMoved(me);
             }
         }
     }

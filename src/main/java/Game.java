@@ -6,11 +6,12 @@ import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class Game implements KeyListener, MouseListener, MouseMotionListener {
+public abstract class Game implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
     public static JFrame frame;
     private GamePanel gamePanel;
     boolean running;
@@ -31,6 +32,7 @@ public abstract class Game implements KeyListener, MouseListener, MouseMotionLis
         frame.addKeyListener(this);
         frame.addMouseListener(this);
         frame.addMouseMotionListener(this);
+        frame.addMouseWheelListener(this);
         run();
     }
 

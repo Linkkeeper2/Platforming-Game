@@ -3,6 +3,7 @@ package main.java.screen.sub;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 
 import main.java.object.GameObject;
@@ -120,6 +121,15 @@ public abstract class SubScreen {
 
             if (obj != null)
                 obj.mouseMoved(me);
+        }
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent me) {
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject obj = objects.get(i);
+
+            if (obj != null)
+                obj.mouseWheelMoved(me);
         }
     }
 

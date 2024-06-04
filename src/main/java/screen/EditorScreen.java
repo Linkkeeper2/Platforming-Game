@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 
 import linkk.manager.SoundManager;
@@ -170,6 +171,19 @@ public class EditorScreen extends Screen {
         super.mouseMoved(me);
 
         updateMouse(me);
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent me) {
+        super.mouseWheelMoved(me);
+
+        if (me.getWheelRotation() > 0) {
+            if (shift < 0)
+                shiftButtons(me.getWheelRotation() * 25);
+        }
+
+        else if (me.getWheelRotation() < 0) {
+            shiftButtons(me.getWheelRotation() * 25);
+        }
     }
 
     public void swap(String obj) {

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.io.IOException;
 import java.util.Timer;
 
@@ -87,6 +88,10 @@ public class MyGame extends Game {
 
     public void mouseMoved(MouseEvent me) {
         screen.mouseMoved(me);
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent me) {
+        screen.mouseWheelMoved(me);
     }
 
     // Launches the Game
