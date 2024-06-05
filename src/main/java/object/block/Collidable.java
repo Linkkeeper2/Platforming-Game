@@ -39,7 +39,7 @@ public abstract class Collidable extends GameObject {
     }
 
     public boolean[] getCollisions(GameObject g) {
-        boolean[] collisions = new boolean[4];
+        boolean[] collisions = new boolean[5];
 
         return collisions;
     }

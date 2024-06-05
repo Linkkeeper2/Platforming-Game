@@ -159,6 +159,10 @@ public abstract class GameObject {
         }
     }
 
+    public void setSprite(BufferedImage image) {
+        sprite = image;
+    }
+
     public void keyTyped(KeyEvent ke) {
     }
 

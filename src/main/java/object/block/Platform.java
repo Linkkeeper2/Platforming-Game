@@ -1,6 +1,7 @@
 package main.java.object.block;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 
 import main.java.object.GameObject;
 
@@ -15,7 +16,7 @@ public class Platform extends Collidable {
     }
 
     public boolean[] getCollisions(GameObject g) {
-        boolean[] collisions = new boolean[4];
+        boolean[] collisions = new boolean[5];
 
         if (type == BlockType.SOLID) {
             if (enabled[0])
@@ -29,6 +30,8 @@ public class Platform extends Collidable {
 
             if (enabled[3])
                 collisions[3] = getBottom(4).intersects(g.getTop(g.height / 2));
+
+            collisions[4] = new Rectangle(x + 30, y + 30, 5, 5).intersects(g.getRect());
         }
 
         return collisions;

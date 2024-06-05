@@ -64,8 +64,10 @@ public abstract class Screen {
     }
 
     public void update() {
-        if (subscreen != null)
+        if (subscreen != null) {
             subscreen.update();
+            Player.main.collisions();
+        }
 
         else {
             for (int i = 0; i < objects.size(); i++) {

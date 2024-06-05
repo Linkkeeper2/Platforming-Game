@@ -74,7 +74,7 @@ public abstract class EntityBody extends GameObject {
         }
     }
 
-    private void collisions() {
+    public void collisions() {
         ArrayList<Collidable> collidables = Collidable.collidables;
 
         boolean unflag = true;
@@ -85,6 +85,9 @@ public abstract class EntityBody extends GameObject {
             boolean[] intersections = platform.getCollisions(this);
 
             platform.collideAction(this);
+
+            if (intersections[4])
+                kill();
 
             boolean side = true;
 

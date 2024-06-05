@@ -19,7 +19,7 @@ import main.java.screen.Screen;
 import main.java.server.Account;
 
 public class Player extends EntityBody {
-    private boolean[] controls;
+    public boolean[] controls;
     public static Player main;
     private SpriteSheet sprites;
     protected String name;

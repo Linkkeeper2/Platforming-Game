@@ -3,6 +3,7 @@ package main.java.screen;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import linkk.manager.SpriteSheetManager;
 import main.java.MyGame;
 import main.java.object.entity.Player;
 import main.java.screen.gui.Clock;
@@ -44,9 +45,12 @@ public abstract class GameScreen extends Screen {
                 break;
 
             case 92: // \
-                if (!Screen.subOn())
+                if (!Screen.subOn()) {
                     Screen.subscreen = new ChatScreen();
-                else
+                    Player.main.controls[0] = false;
+                    Player.main.controls[2] = false;
+                    Player.main.setSprite(SpriteSheetManager.getSheet("Player").getSprite(0));
+                } else
                     Screen.subscreen = null;
                 break;
         }
