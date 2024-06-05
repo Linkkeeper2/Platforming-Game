@@ -1,13 +1,16 @@
 package main.java.server;
 
+import java.awt.Color;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.Binary;
+import org.bson.types.ObjectId;
 
 import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -19,6 +22,8 @@ import main.java.MyGame;
 import main.java.object.entity.GhostPlayer;
 import main.java.object.entity.Player;
 import main.java.screen.Screen;
+import main.java.screen.gui.text.Text;
+import main.java.screen.sub.ChatScreen;
 
 public class Database {
     private MongoClient client;
@@ -375,5 +380,41 @@ public class Database {
             return false;
 
         return true;
+    }
+
+    public void addMessage(String contents) {
+        collection = database.getCollection("Messages");
+
+        Document message = new Document()
+                .append("_id", new ObjectId())
+                .append("contents", contents)
+                .append("user", Account.name);
+
+        collection.insertOne(message);
+        ChatScreen.shiftOverlay();
+    }
+
+    public void updateMessages() {
+        collection = database.getCollection("Messages");
+
+        ArrayList<Document> messages = new ArrayList<>();
+
+        FindIterable<Document> a = collection.find();
+
+        a.into(messages);
+
+        if (messages.size() == MyGame.chat.getSize())
+            return;
+
+        MyGame.chat.clearMessages();
+
+        for (int i = 0; i < messages.size(); i++) {
+            Document message = messages.get(i);
+
+            MyGame.chat.addMessage(
+                    new Text(0, 0, message.getString("user") + ": " + message.getString("contents"), Color.BLACK, 24));
+        }
+
+        ChatScreen.shiftOverlay();
     }
 }

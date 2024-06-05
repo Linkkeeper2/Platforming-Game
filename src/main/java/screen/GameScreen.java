@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import main.java.MyGame;
 import main.java.object.entity.Player;
 import main.java.screen.gui.Clock;
+import main.java.screen.sub.ChatScreen;
 import main.java.screen.sub.PauseScreen;
 
 public abstract class GameScreen extends Screen {
@@ -38,6 +39,13 @@ public abstract class GameScreen extends Screen {
             case 82: // R
                 Player.main.kill();
                 Screen.subscreen = null;
+                break;
+
+            case 92: // \
+                if (!Screen.subOn())
+                    Screen.subscreen = new ChatScreen();
+                else
+                    Screen.subscreen = null;
                 break;
         }
     }

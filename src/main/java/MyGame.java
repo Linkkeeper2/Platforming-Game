@@ -14,6 +14,7 @@ import main.java.screen.Screen;
 import main.java.screen.StartScreen;
 import main.java.screen.gui.FPSCounter;
 import main.java.server.Database;
+import main.java.server.ServerChat;
 import main.java.server.ServerStatus;
 
 public class MyGame extends Game {
@@ -26,12 +27,15 @@ public class MyGame extends Game {
     public static Database database;
     public static ServerStatus status = new ServerStatus();
     public static FPSCounter fps = new FPSCounter(SCREEN_WIDTH - 100, 24, Color.BLACK);
+    public static ServerChat chat = new ServerChat();
 
     public MyGame() {
         screen = new StartScreen();
         database = new Database();
         initSprites();
         fps.start();
+        chat.left = MyGame.SCREEN_WIDTH - 512;
+        chat.bottom = MyGame.SCREEN_HEIGHT - 64;
     }
 
     public void initSprites() {

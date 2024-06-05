@@ -10,6 +10,7 @@ public class ServerUpdates extends Thread {
             MyGame.database.updateMain();
             Player.updatePlayers();
             MyGame.database.addPlayers();
+            MyGame.database.updateMessages();
             try {
                 sleep(10);
             } catch (InterruptedException e) {
