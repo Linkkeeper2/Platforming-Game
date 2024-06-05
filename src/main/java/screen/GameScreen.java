@@ -37,8 +37,10 @@ public abstract class GameScreen extends Screen {
                 break;
 
             case 82: // R
-                Player.main.kill();
-                Screen.subscreen = null;
+                if (!(Screen.subscreen instanceof ChatScreen)) {
+                    Player.main.kill();
+                    Screen.subscreen = null;
+                }
                 break;
 
             case 92: // \
