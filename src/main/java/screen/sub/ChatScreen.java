@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import main.java.MyGame;
-import main.java.screen.Screen;
 import main.java.screen.gui.Overlay;
 import main.java.screen.gui.text.ChatThread;
 import main.java.screen.gui.text.TextBox;
