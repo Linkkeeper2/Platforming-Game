@@ -41,6 +41,7 @@ public class MyGame extends Game {
     public void initSprites() {
         try {
             SpriteSheetManager.addSheet("Player", 50, 50, "./gfx/Player/Player.png");
+            SpriteSheetManager.addSheet("JumpBooster", 64, 64, "./gfx/Objects/JumpBooster.png");
         } catch (IOException | DuplicateKeyException e) {
             status.addMessage("Failed to load sprites.", 5000);
         }
