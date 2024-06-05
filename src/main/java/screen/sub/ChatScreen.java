@@ -16,7 +16,8 @@ public class ChatScreen extends SubScreen {
 
     public ChatScreen() {
         overlay = new Overlay(MyGame.chat.left, MyGame.chat.bottom - (MyGame.chat.getSize() + 1) * 28,
-                MyGame.SCREEN_WIDTH - MyGame.chat.left, MyGame.SCREEN_HEIGHT, new Color(200, 200, 200, 64));
+                MyGame.SCREEN_WIDTH - MyGame.chat.left, (MyGame.chat.getSize() + 2) * 28,
+                new Color(200, 200, 200, 128));
         objects.add(overlay);
     }
 
@@ -57,7 +58,9 @@ public class ChatScreen extends SubScreen {
     }
 
     public static void shiftOverlay() {
-        if (overlay != null)
+        if (overlay != null) {
             overlay.y = MyGame.chat.bottom - (MyGame.chat.getSize() + 1) * 28;
+            overlay.height = (MyGame.chat.getSize() + 2) * 28;
+        }
     }
 }
