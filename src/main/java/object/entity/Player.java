@@ -86,7 +86,7 @@ public class Player extends EntityBody {
     public void controls() {
         if (controls[0] || controls[2]) {
             if (xVel < baseXVel)
-                xVel += 1;
+                xVel += 2;
 
             x += xVel * direction;
 
