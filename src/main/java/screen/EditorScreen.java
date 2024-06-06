@@ -197,7 +197,8 @@ public class EditorScreen extends Screen {
                 break;
 
             case "End":
-                selectedObject = new GhostObject(x, y, "./gfx/Objects/Flag.png");
+                BufferedImage sprite = GameObject.getSprite("./gfx/Objects/Flag.png").getSubimage(0, 0, 64, 64);
+                selectedObject = new GhostObject(x, y, sprite);
                 break;
 
             default:

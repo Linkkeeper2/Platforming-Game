@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import linkk.manager.SpriteSheetManager;
+import linkk.manager.SpriteSheetManager.SpriteSheet;
 import main.java.object.meta.Hitbox;
 
 public abstract class GameObject {
@@ -24,6 +26,9 @@ public abstract class GameObject {
     protected BufferedImage sprite;
     protected Hitbox hitbox;
     public boolean animated;
+    protected double animation;
+    protected double animationSpeed;
+    protected SpriteSheet spriteSheet;
 
     public GameObject(int x, int y, int width, int height, Color color) {
         this.x = x;
@@ -54,7 +59,24 @@ public abstract class GameObject {
     }
 
     public void update() {
+        spriteAnimation();
+    }
 
+    protected void spriteAnimation() {
+        if (animated) {
+            animation += animationSpeed;
+
+            try {
+                sprite = spriteSheet.getSprite((int) animation);
+            } catch (IndexOutOfBoundsException e) {
+                animation = 0;
+            }
+        }
+    }
+
+    protected void initAnimation(boolean animated, double animationSpeed) {
+        this.animated = animated;
+        this.animationSpeed = animationSpeed;
     }
 
     public Rectangle getRect() {
@@ -177,6 +199,10 @@ public abstract class GameObject {
 
     public void setSprite(BufferedImage image) {
         sprite = image;
+    }
+
+    public void setSheet(String name) {
+        spriteSheet = SpriteSheetManager.getSheet(name);
     }
 
     public void keyTyped(KeyEvent ke) {

@@ -45,11 +45,29 @@ public class GhostPlayer extends Player {
     }
 
     public void update() {
-
+        animation += animationSpeed;
+        animation %= 2;
+        controls();
     }
 
     public void controls() {
+        if (direction == 1) {
+            if (animation < 1)
+                sprite = spriteSheet.getSprite(1);
+            else
+                sprite = spriteSheet.getSprite(4);
+        }
 
+        else if (direction == -1) {
+            if (animation < 1)
+                sprite = spriteSheet.getSprite(2);
+            else
+                sprite = spriteSheet.getSprite(5);
+        }
+
+        else {
+            sprite = spriteSheet.getSprite(0);
+        }
     }
 
     public void kill() {

@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import linkk.manager.SoundManager;
-import linkk.manager.SpriteSheetManager;
-import linkk.manager.SpriteSheetManager.SpriteSheet;
 import linkk.util.StringUtil;
 import main.java.MyGame;
 import main.java.screen.RoomScreen;
@@ -21,11 +19,9 @@ import main.java.server.Account;
 public class Player extends EntityBody {
     public boolean[] controls;
     public static Player main;
-    private SpriteSheet sprites;
     protected String name;
     public static ArrayList<Player> players = new ArrayList<>();
     protected int currLevel;
-    private double runCounter; // Animates the sprite for movement
 
     public Player(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -41,20 +37,22 @@ public class Player extends EntityBody {
 
         main = this;
         alive = true;
-        sprites = SpriteSheetManager.getSheet("Player");
-        sprite = sprites.getSprite(0);
         name = Account.name;
         xVel = 0;
         baseXVel = 10;
         new MovementThread(this).start();
+        setSheet("Player");
+        sprite = spriteSheet.getSprite(0);
+        animationSpeed = 0.1;
     }
 
     public Player(int x, int y, String name) {
         super(x, y, 50, 50, new Color(0, 100, 255));
         controls = new boolean[3];
         alive = true;
-        sprites = SpriteSheetManager.getSheet("Player");
-        sprite = sprites.getSprite(0);
+        setSheet("Player");
+        sprite = spriteSheet.getSprite(0);
+        animationSpeed = 0.1;
         this.name = name;
         players.add(this);
     }
@@ -77,8 +75,8 @@ public class Player extends EntityBody {
 
     public void update() {
         y += yVel * gravity;
-        runCounter += 0.1;
-        runCounter %= 2;
+        animation += animationSpeed;
+        animation %= 2;
 
         super.update();
     }
@@ -93,17 +91,17 @@ public class Player extends EntityBody {
             hitbox.updateRect(x, y, width, height);
 
             if (direction == 1) {
-                if (runCounter < 1)
-                    sprite = sprites.getSprite(1);
+                if (animation < 1)
+                    sprite = spriteSheet.getSprite(1);
                 else
-                    sprite = sprites.getSprite(4);
+                    sprite = spriteSheet.getSprite(4);
             }
 
             else if (direction == -1) {
-                if (runCounter < 1)
-                    sprite = sprites.getSprite(2);
+                if (animation < 1)
+                    sprite = spriteSheet.getSprite(2);
                 else
-                    sprite = sprites.getSprite(5);
+                    sprite = spriteSheet.getSprite(5);
             }
         }
 
@@ -141,19 +139,19 @@ public class Player extends EntityBody {
                 controls[0] = true;
                 Screen.globalControls[0] = true;
                 direction = -1;
-                sprite = sprites.getSprite(2);
+                sprite = spriteSheet.getSprite(2);
                 break;
 
             case 38: // UP
                 controls[1] = true;
-                sprite = sprites.getSprite(3);
+                sprite = spriteSheet.getSprite(3);
                 break;
 
             case 39: // RIGHT
                 controls[2] = true;
                 Screen.globalControls[1] = true;
                 direction = 1;
-                sprite = sprites.getSprite(1);
+                sprite = spriteSheet.getSprite(1);
                 break;
         }
     }
@@ -163,19 +161,21 @@ public class Player extends EntityBody {
             case 37: // LEFT
                 controls[0] = false;
                 Screen.globalControls[0] = false;
-                sprite = sprites.getSprite(0);
+                sprite = spriteSheet.getSprite(0);
+                direction = 0;
                 break;
 
             case 38: // UP
                 controls[1] = false;
                 jumping = false;
-                sprite = sprites.getSprite(0);
+                sprite = spriteSheet.getSprite(0);
                 break;
 
             case 39: // RIGHT
                 controls[2] = false;
                 Screen.globalControls[1] = true;
-                sprite = sprites.getSprite(0);
+                sprite = spriteSheet.getSprite(0);
+                direction = 0;
                 break;
         }
     }

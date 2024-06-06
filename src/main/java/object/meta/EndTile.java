@@ -9,5 +9,7 @@ public class EndTile extends GameObject {
         super(x, y, 64, 64, Color.YELLOW);
 
         setSprite("./gfx/Objects/Flag.png");
+        setSheet("Flag");
+        initAnimation(true, 0.15);
     }
 }

@@ -16,6 +16,8 @@ public abstract class Interactable extends GameObject {
     }
 
     public void update() {
+        super.update();
+
         if (Player.main != null && !isColliding(Player.main))
             canActivate = true;
 
