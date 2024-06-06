@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import linkk.manager.SoundManager;
@@ -220,11 +221,19 @@ public class EditorScreen extends Screen {
 
     private void setGhost() {
         String path = "./gfx/Objects/" + object;
+        BufferedImage sprite = GameObject.getSprite(path + ".png");
 
-        if (rotation != 0 && rotatables.contains(object))
-            path += rotation + "";
+        if (sprite.getWidth() > 64) {
+            BufferedImage smallSprite = sprite.getSubimage(0, 0, 64, 64);
+            selectedObject = new GhostObject(x - (x % 64), y - (y % 64), smallSprite);
+        }
 
-        selectedObject = new GhostObject(x - (x % 64), y - (y % 64), path + ".png");
+        else {
+            if (rotation != 0 && rotatables.contains(object))
+                path += rotation + "";
+
+            selectedObject = new GhostObject(x - (x % 64), y - (y % 64), path + ".png");
+        }
     }
 
     private void setTile(int row, int col, int type) {

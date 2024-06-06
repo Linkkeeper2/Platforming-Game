@@ -23,6 +23,7 @@ public abstract class GameObject {
     public int direction;
     protected BufferedImage sprite;
     protected Hitbox hitbox;
+    public boolean animated;
 
     public GameObject(int x, int y, int width, int height, Color color) {
         this.x = x;
@@ -157,6 +158,21 @@ public abstract class GameObject {
             }
         } catch (IOException e) {
         }
+    }
+
+    public static BufferedImage getSprite(String path) {
+        BufferedImage sprite = null;
+
+        try {
+            if (!path.equals("")) {
+                sprite = ImageIO.read(new File(path));
+            } else {
+                sprite = null;
+            }
+        } catch (IOException e) {
+        }
+
+        return sprite;
     }
 
     public void setSprite(BufferedImage image) {

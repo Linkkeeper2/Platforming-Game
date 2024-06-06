@@ -4,6 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class GhostObject extends GameObject {
     public GhostObject(int x, int y, Color color) {
@@ -13,6 +14,11 @@ public class GhostObject extends GameObject {
     public GhostObject(int x, int y, String spritePath) {
         super(x, y, 64, 64, null);
         setSprite(spritePath);
+    }
+
+    public GhostObject(int x, int y, BufferedImage sprite) {
+        super(x, y, 64, 64, null);
+        setSprite(sprite);
     }
 
     public void draw(Graphics pen) {

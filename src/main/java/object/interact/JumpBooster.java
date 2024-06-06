@@ -15,6 +15,7 @@ public class JumpBooster extends Interactable {
         behavior = new Boost();
         spriteSheet = SpriteSheetManager.getSheet("JumpBooster");
         setSprite(spriteSheet.getSprite(0));
+        animated = true;
     }
 
     public void update() {
