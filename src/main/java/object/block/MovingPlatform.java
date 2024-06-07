@@ -16,7 +16,7 @@ public class MovingPlatform extends Platform {
         this.speed = speed;
         this.p1 = p1;
         this.p2 = p2;
-        setSprite("./gfx/Objects/MovingBlock.png");
+        setSheet("MovingBlock");
     }
 
     public MovingPlatform(int x, int y, int speed) {
@@ -25,10 +25,12 @@ public class MovingPlatform extends Platform {
         this.speed = speed;
         this.p1 = new Point(x, y);
         this.p2 = new Point(x - 256, y);
-        setSprite("./gfx/Objects/MovingBlock.png");
+        setSheet("MovingBlock");
     }
 
     public void update() {
+        super.update();
+
         if (direction == 1) {
             moveTowards(p1.x, p1.y, speed);
 

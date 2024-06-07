@@ -43,8 +43,10 @@ public class MyGame extends Game {
             SpriteSheetManager.addSheet("Player", 50, 50, "./gfx/Player/Player.png");
             SpriteSheetManager.addSheet("JumpBooster", 64, 64, "./gfx/Objects/JumpBooster.png");
             SpriteSheetManager.addSheet("Flag", 64, 64, "./gfx/Objects/Flag.png");
+            SpriteSheetManager.addSheet("Block", 64, 64, "./gfx/Objects/Block.png");
+            SpriteSheetManager.addSheet("MovingBlock", 64, 64, "./gfx/Objects/MovingBlock.png");
         } catch (IOException | DuplicateKeyException e) {
-            status.addMessage("Failed to load sprites.", 5000);
+            status.addMessage("Failed to load sprites.", 10000);
         }
     }
 
