@@ -18,6 +18,8 @@ public abstract class Collidable extends GameObject {
      * 3: Bottom
      */
     protected boolean[] enabled;
+    public static double animationCycle = 0;
+    public static double animationCycleSpeed = 0.05;
 
     public Collidable(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
@@ -28,6 +30,16 @@ public abstract class Collidable extends GameObject {
 
         if (!(this instanceof MovingPlatform))
             setEnabled();
+    }
+
+    protected void spriteAnimation() {
+        if (animated) {
+            try {
+                sprite = spriteSheet.getSprite((int) animationCycle);
+            } catch (IndexOutOfBoundsException e) {
+                animationCycle = 0;
+            }
+        }
     }
 
     public void draw(Graphics pen) {

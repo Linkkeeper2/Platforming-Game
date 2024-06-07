@@ -14,6 +14,7 @@ import main.java.object.block.MovingPlatform;
 import main.java.object.block.Platform;
 import main.java.object.entity.Particle;
 import main.java.object.entity.Player;
+import main.java.object.interact.Interactable;
 import main.java.screen.sub.SubScreen;
 
 public abstract class Screen {
@@ -79,6 +80,8 @@ public abstract class Screen {
         }
 
         MyGame.fps.update();
+        Collidable.animationCycle += Collidable.animationCycleSpeed;
+        Interactable.animationCycle += Interactable.animationCycleSpeed;
     }
 
     public void keyTyped(KeyEvent ke) {
