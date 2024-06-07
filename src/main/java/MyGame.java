@@ -45,6 +45,7 @@ public class MyGame extends Game {
             SpriteSheetManager.addSheet("Flag", 64, 64, "./gfx/Objects/Flag.png");
             SpriteSheetManager.addSheet("Block", 64, 64, "./gfx/Objects/Block.png");
             SpriteSheetManager.addSheet("MovingBlock", 64, 64, "./gfx/Objects/MovingBlock.png");
+            SpriteSheetManager.addSheet("GravityTile", 64, 64, "./gfx/Objects/GravityTile.png");
         } catch (IOException | DuplicateKeyException e) {
             status.addMessage("Failed to load sprites.", 10000);
         }

@@ -8,6 +8,7 @@ public class GravityTile extends Interactable {
     public GravityTile(int x, int y) {
         super(x, y, Color.CYAN);
         behavior = new FlipBehavior();
-        setSprite("./gfx/Objects/GravityTile.png");
+        setSheet("GravityTile");
+        initAnimation(true, 0.3);
     }
 }

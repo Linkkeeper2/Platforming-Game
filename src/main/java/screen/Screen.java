@@ -77,11 +77,12 @@ public abstract class Screen {
                 if (obj != null && !(obj instanceof Particle))
                     obj.update();
             }
+
+            Collidable.animationCycle += Collidable.animationCycleSpeed * 65 / MyGame.fps.getFPS();
+            Interactable.animationCycle += Interactable.animationCycleSpeed * 65 / MyGame.fps.getFPS();
         }
 
         MyGame.fps.update();
-        Collidable.animationCycle += Collidable.animationCycleSpeed;
-        Interactable.animationCycle += Interactable.animationCycleSpeed;
     }
 
     public void keyTyped(KeyEvent ke) {
